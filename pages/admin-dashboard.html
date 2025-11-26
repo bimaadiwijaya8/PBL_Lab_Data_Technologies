@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Laboratorium Data Technologies</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00A0D6',
+                        secondary: '#6AC259',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="../index.html" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <!-- Sidebar -->
+    <div class="fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out" id="sidebar">
+        <div class="flex items-center justify-center h-16 bg-gradient-to-r from-primary to-blue-600">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-lg overflow-hidden">
+                    <img src="../assets/img/logo.png" alt="Logo" class="w-full h-full object-cover">
+                </div>
+                <h1 class="text-white text-lg font-bold">Admin Panel</h1>
+            </div>
+        </div>
+        
+        <nav class="mt-6 px-3">
+            <a href="#dashboard" class="flex items-center px-3 py-3 text-primary bg-blue-50 border-r-2 border-primary rounded-lg mb-1 sidebar-link active">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2v0"></path>
+                </svg>
+                <span class="font-medium">Dashboard</span>
+            </a>
+            <a href="#verifikasi-member" class="flex items-center px-3 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary rounded-lg mb-1 transition-all duration-200 sidebar-link">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span class="font-medium">Verifikasi Member</span>
+            </a>
+            <a href="#persetujuan" class="flex items-center px-3 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary rounded-lg mb-1 transition-all duration-200 sidebar-link">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                </svg>
+                <span class="font-medium">Persetujuan Konten</span>
+            </a>
+            <a href="#kelola-berita" class="flex items-center px-3 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary rounded-lg mb-1 transition-all duration-200 sidebar-link">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+                </svg>
+                <span class="font-medium">Kelola Berita</span>
+            </a>
+            <a href="#kelola-publikasi" class="flex items-center px-3 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary rounded-lg mb-1 transition-all duration-200 sidebar-link">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                </svg>
+                <span class="font-medium">Kelola Publikasi</span>
+            </a>
+            <a href="#kelola-agenda" class="flex items-center px-3 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary rounded-lg mb-1 transition-all duration-200 sidebar-link">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                <span class="font-medium">Kelola Agenda</span>
+            </a>
+            <a href="#kelola-galeri" class="flex items-center px-3 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary rounded-lg mb-1 transition-all duration-200 sidebar-link">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                <span class="font-medium">Kelola Galeri</span>
+            </a>
+            <a href="#kelola-anggota" class="flex items-center px-3 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary rounded-lg mb-1 transition-all duration-200 sidebar-link">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+                <span class="font-medium">Kelola Anggota</span>
+            </a>
+            <a href="#kelola-fasilitas" class="flex items-center px-3 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary rounded-lg mb-1 transition-all duration-200 sidebar-link">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+                <span class="font-medium">Kelola Fasilitas</span>
+            </a>
+            <a href="#kelola-pengumuman" class="flex items-center px-3 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary rounded-lg mb-1 transition-all duration-200 sidebar-link">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path>
+                </svg>
+                <span class="font-medium">Kelola Pengumuman</span>
+            </a>
+            
+            <div class="border-t border-gray-200 mt-4 pt-4">
+                <a href="#" onclick="logout()" class="flex items-center px-3 py-3 text-gray-700 hover:bg-red-50 hover:text-red-500 rounded-lg transition-all duration-200">
+                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                    </svg>
+                    <span class="font-medium">Logout</span>
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Mobile menu button -->
+    <div class="lg:hidden fixed top-4 left-4 z-50">
+        <button id="mobile-menu-btn" class="bg-primary text-white p-2 rounded-md">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="lg:ml-64 min-h-screen">
+        <!-- Header -->
+        <header class="bg-white shadow-sm border-b border-gray-200">
+            <div class="px-6 py-4 flex items-center justify-between">
+                <!-- Breadcrumb & Title -->
+                <div>
+                    <nav class="flex items-center space-x-2 text-sm text-gray-500 mb-1">
+                        <span>Admin</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                        <span id="breadcrumb-current">Dashboard</span>
+                    </nav>
+                    <h2 class="text-2xl font-bold text-gray-800" id="page-title">Dashboard</h2>
+                </div>
+                
+                <!-- User Info -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-3">
+                        <img src="https://via.placeholder.com/40x40/00A0D6/FFFFFF?text=AD" alt="Admin" class="w-10 h-10 rounded-full border-2 border-gray-200">
+                        <div>
+                            <p class="text-sm font-medium text-gray-800">Administrator</p>
+                            <p class="text-xs text-gray-500">Super Admin</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content Area -->
+        <main class="p-6">
+            <!-- Dashboard Section -->
+            <div id="dashboard-section" class="content-section">
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-gradient-to-br from-white to-blue-50 rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-all duration-300">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gradient-to-br from-primary to-blue-600 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-3xl font-bold text-gray-900" id="pending-members">0</h4>
+                                <p class="text-sm font-medium text-gray-600">Member Pending</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-white to-yellow-50 rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-all duration-300">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-3xl font-bold text-gray-900" id="pending-changes">0</h4>
+                                <p class="text-sm font-medium text-gray-600">Perubahan Pending</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-white to-green-50 rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-all duration-300">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gradient-to-br from-secondary to-green-600 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-3xl font-bold text-gray-900" id="total-members">0</h4>
+                                <p class="text-sm font-medium text-gray-600">Total Member</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-white to-purple-50 rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-all duration-300">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-3xl font-bold text-gray-900" id="total-publications">0</h4>
+                                <p class="text-sm font-medium text-gray-600">Total Publikasi</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activities -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Aktivitas Terbaru</h3>
+                    <div id="recent-activities">
+                        <!-- Data aktivitas akan dimuat dari API -->
+                        <p class="text-gray-500 text-center py-8">Belum ada aktivitas terbaru</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Verifikasi Member Section -->
+            <div id="verifikasi-member-section" class="content-section hidden">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-semibold text-gray-800">Verifikasi Member Baru</h3>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">NIM</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jurusan</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal Daftar</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200" id="pending-members-table">
+                                <!-- Data member pending akan dimuat dari API -->
+                                <tr>
+                                    <td colspan="5" class="px-6 py-8 text-center text-gray-500">
+                                        Belum ada member yang menunggu verifikasi
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Persetujuan Perubahan Section -->
+            <div id="persetujuan-section" class="content-section hidden">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-semibold text-gray-800">Persetujuan Perubahan Editor & Member</h3>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipe</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Judul</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Diajukan Oleh</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200" id="pending-changes-table">
+                                <!-- Data perubahan pending akan dimuat dari API -->
+                                <tr>
+                                    <td colspan="5" class="px-6 py-8 text-center text-gray-500">
+                                        Belum ada perubahan yang menunggu persetujuan
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kelola Berita Section -->
+            <div id="kelola-berita-section" class="content-section hidden">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-semibold text-gray-800">Kelola Berita</h3>
+                        <button onclick="showCreateBeritaModal()" class="bg-secondary text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors duration-200">
+                            <i class="fas fa-plus mr-2"></i>Tambah Berita
+                        </button>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Judul</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kategori</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200" id="berita-table">
+                                <!-- Data berita akan dimuat dari API -->
+                                <tr>
+                                    <td colspan="5" class="px-6 py-8 text-center text-gray-500">
+                                        Belum ada berita tersedia
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kelola Publikasi Section -->
+            <div id="kelola-publikasi-section" class="content-section hidden">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-semibold text-gray-800">Kelola Publikasi</h3>
+                        <button onclick="showCreatePublikasiModal()" class="bg-secondary text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors duration-200">
+                            <i class="fas fa-plus mr-2"></i>Tambah Publikasi
+                        </button>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Judul</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Penulis</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipe</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200" id="publikasi-table">
+                                <!-- Data publikasi akan dimuat dari API -->
+                                <tr>
+                                    <td colspan="5" class="px-6 py-8 text-center text-gray-500">
+                                        Belum ada publikasi tersedia
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kelola Agenda Section -->
+            <div id="kelola-agenda-section" class="content-section hidden">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-semibold text-gray-800">Kelola Agenda</h3>
+                        <button onclick="showCreateAgendaModal()" class="bg-secondary text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors duration-200">
+                            <i class="fas fa-plus mr-2"></i>Tambah Agenda
+                        </button>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Agenda</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Lokasi</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200" id="agenda-table">
+                                <!-- Data agenda akan dimuat dari API -->
+                                <tr>
+                                    <td colspan="5" class="px-6 py-8 text-center text-gray-500">
+                                        Belum ada agenda tersedia
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kelola Galeri Section -->
+            <div id="kelola-galeri-section" class="content-section hidden">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-semibold text-gray-800">Kelola Galeri</h3>
+                        <button onclick="showCreateGaleriModal()" class="bg-secondary text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors duration-200">
+                            <i class="fas fa-plus mr-2"></i>Tambah Foto
+                        </button>
+                    </div>
+
+                    <div id="galeri-admin-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        <!-- Data galeri akan dimuat dari API -->
+                        <div class="col-span-full text-center py-16">
+                            <i class="fas fa-images text-4xl text-gray-400 mb-4"></i>
+                            <p class="text-gray-500">Belum ada foto di galeri</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kelola Anggota Section -->
+            <div id="kelola-anggota-section" class="content-section hidden">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-semibold text-gray-800">Kelola Anggota</h3>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">NIM</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200" id="anggota-table">
+                                <!-- Data anggota akan dimuat dari API -->
+                                <tr>
+                                    <td colspan="5" class="px-6 py-8 text-center text-gray-500">
+                                        Belum ada anggota terdaftar
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kelola Fasilitas Section -->
+            <div id="kelola-fasilitas-section" class="content-section hidden">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-semibold text-gray-800">Kelola Fasilitas</h3>
+                        <button onclick="showCreateFasilitasModal()" class="bg-secondary text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors duration-200">
+                            <i class="fas fa-plus mr-2"></i>Tambah Fasilitas
+                        </button>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Foto</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Fasilitas</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Deskripsi</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal Update</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200" id="fasilitas-table">
+                                <!-- Data fasilitas akan dimuat dari API -->
+                                <tr>
+                                    <td colspan="5" class="px-6 py-8 text-center text-gray-500">
+                                        Belum ada fasilitas tersedia
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kelola Pengumuman Section -->
+            <div id="kelola-pengumuman-section" class="content-section hidden">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-semibold text-gray-800">Kelola Pengumuman</h3>
+                        <button onclick="showCreatePengumumanModal()" class="bg-secondary text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors duration-200">
+                            <i class="fas fa-plus mr-2"></i>Tambah Pengumuman
+                        </button>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Judul</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prioritas</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200" id="pengumuman-table">
+                                <!-- Data pengumuman akan dimuat dari API -->
+                                <tr>
+                                    <td colspan="5" class="px-6 py-8 text-center text-gray-500">
+                                        Belum ada pengumuman tersedia
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals will be added here for CRUD operations -->
+    <!-- Create Berita Modal -->
+    <div id="create-berita-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-screen overflow-y-auto">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-semibold text-gray-800">Tambah Berita Baru</h3>
+                        <button onclick="closeCreateBeritaModal()" class="text-gray-400 hover:text-gray-600">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+
+                    <form id="create-berita-form" onsubmit="return handleCreateBerita(event)" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Judul Berita</label>
+                            <input type="text" name="title" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Kategori</label>
+                            <select name="category" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                                <option value="">Pilih Kategori</option>
+                                <option value="Berita">Berita</option>
+                                <option value="Pengumuman">Pengumuman</option>
+                                <option value="Agenda">Agenda</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Konten</label>
+                            <textarea name="content" rows="6" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required></textarea>
+                        </div>
+
+                        <div class="flex justify-end space-x-4">
+                            <button type="button" onclick="closeCreateBeritaModal()" class="px-6 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors duration-200">
+                                Batal
+                            </button>
+                            <button type="submit" class="px-6 py-2 bg-secondary text-white rounded-md hover:bg-green-600 transition-colors duration-200">
+                                Simpan Berita
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/app.js"></script>
+    <script>
+        // Initialize admin dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeAdminDashboard();
+        });
+
+        function initializeAdminDashboard() {
+            // Initialize sidebar navigation
+            const sidebarLinks = document.querySelectorAll('.sidebar-link');
+            const contentSections = document.querySelectorAll('.content-section');
+            const pageTitle = document.getElementById('page-title');
+            
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const sidebar = document.getElementById('sidebar');
+            
+            if (mobileMenuBtn && sidebar) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    sidebar.classList.toggle('-translate-x-full');
+                });
+            }
+            
+            // Sidebar navigation
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links
+                    sidebarLinks.forEach(l => l.classList.remove('active', 'bg-blue-50', 'text-primary', 'border-r-2', 'border-primary'));
+                    
+                    // Add active class to clicked link
+                    link.classList.add('active', 'bg-blue-50', 'text-primary', 'border-r-2', 'border-primary');
+                    
+                    // Hide all content sections
+                    contentSections.forEach(section => section.classList.add('hidden'));
+                    
+                    // Show corresponding content section
+                    const href = link.getAttribute('href');
+                    const sectionId = href.substring(1) + '-section';
+                    const section = document.getElementById(sectionId);
+                    
+                    if (section) {
+                        section.classList.remove('hidden');
+                        
+                        // Update page title
+                        const titles = {
+                            'dashboard': 'Dashboard',
+                            'verifikasi-member': 'Verifikasi Member',
+                            'persetujuan': 'Persetujuan Perubahan',
+                            'kelola-berita': 'Kelola Berita',
+                            'kelola-publikasi': 'Kelola Publikasi',
+                            'kelola-agenda': 'Kelola Agenda',
+                            'kelola-galeri': 'Kelola Galeri',
+                            'kelola-anggota': 'Kelola Anggota',
+                            'kelola-fasilitas': 'Kelola Fasilitas',
+                            'kelola-pengumuman': 'Kelola Pengumuman'
+                        };
+                        
+                        const sectionName = href.substring(1);
+                        pageTitle.textContent = titles[sectionName] || 'Dashboard';
+                    }
+                    
+                    // Close mobile menu
+                    if (sidebar) {
+                        sidebar.classList.add('-translate-x-full');
+                    }
+                });
+            });
+        }
+
+        // Modal functions
+        function showCreateBeritaModal() {
+            document.getElementById('create-berita-modal').classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeCreateBeritaModal() {
+            document.getElementById('create-berita-modal').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        function showCreatePublikasiModal() {
+            // Similar modal for publikasi
+            console.log('Show create publikasi modal');
+        }
+
+        function showCreateAgendaModal() {
+            // Similar modal for agenda
+            console.log('Show create agenda modal');
+        }
+
+        function showCreateGaleriModal() {
+            // Similar modal for galeri
+            console.log('Show create galeri modal');
+        }
+
+        function showCreateFasilitasModal() {
+            document.getElementById('facility-modal').classList.remove('hidden');
+        }
+
+        function closeFacilityModal() {
+            document.getElementById('facility-modal').classList.add('hidden');
+            document.getElementById('facility-form').reset();
+            document.getElementById('photo-preview').classList.add('hidden');
+        }
+
+        function previewPhoto() {
+            const fileInput = document.getElementById('facility-photo');
+            const preview = document.getElementById('photo-preview');
+            const previewImg = document.getElementById('preview-img');
+            
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    preview.classList.remove('hidden');
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        }
+
+        function saveFacility() {
+            const formData = new FormData();
+            const photoFile = document.getElementById('facility-photo').files[0];
+            const nama = document.getElementById('facility-name').value;
+            const deskripsi = document.getElementById('facility-description').value;
+
+            if (!photoFile || !nama || !deskripsi) {
+                alert('Semua field harus diisi!');
+                return;
+            }
+
+            formData.append('foto', photoFile);
+            formData.append('nama', nama);
+            formData.append('deskripsi', deskripsi);
+
+            // TODO: Send to API
+            console.log('Saving facility:', { nama, deskripsi, photo: photoFile.name });
+            
+            // Close modal after save
+            closeFacilityModal();
+            
+            // TODO: Refresh table data
+            alert('Fasilitas berhasil disimpan!');
+        }
+
+        function showCreatePengumumanModal() {
+            // Modal for creating pengumuman
+            console.log('Show create pengumuman modal');
+        }
+    </script>
+
+    <!-- Facility Modal -->
+    <div id="facility-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between p-6 border-b border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-900">Tambah Fasilitas Baru</h3>
+                <button onclick="closeFacilityModal()" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <form id="facility-form" class="p-6 space-y-6" enctype="multipart/form-data">
+                <!-- Photo Upload -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Foto Fasilitas <span class="text-red-500">*</span>
+                    </label>
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-primary transition-colors">
+                        <input type="file" id="facility-photo" accept="image/*" onchange="previewPhoto()" class="hidden" required>
+                        <label for="facility-photo" class="cursor-pointer">
+                            <svg class="mx-auto h-12 w-12 text-gray-400 mb-4" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <div class="text-sm text-gray-600">
+                                <span class="font-medium text-primary hover:text-blue-600">Klik untuk upload</span> atau drag & drop
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">PNG, JPG, JPEG hingga 5MB</p>
+                        </label>
+                    </div>
+                    
+                    <!-- Photo Preview -->
+                    <div id="photo-preview" class="hidden mt-4">
+                        <div class="relative inline-block">
+                            <img id="preview-img" class="w-32 h-32 object-cover rounded-lg border border-gray-200" alt="Preview">
+                            <button type="button" onclick="document.getElementById('photo-preview').classList.add('hidden'); document.getElementById('facility-photo').value = '';" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600 transition-colors">
+                                ×
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Facility Name -->
+                <div>
+                    <label for="facility-name" class="block text-sm font-medium text-gray-700 mb-2">
+                        Nama Fasilitas <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="facility-name" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" placeholder="Masukkan nama fasilitas" required>
+                </div>
+
+                <!-- Facility Description -->
+                <div>
+                    <label for="facility-description" class="block text-sm font-medium text-gray-700 mb-2">
+                        Deskripsi Fasilitas <span class="text-red-500">*</span>
+                    </label>
+                    <textarea id="facility-description" rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" placeholder="Masukkan deskripsi fasilitas..." required></textarea>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex items-center justify-end space-x-3 pt-4 border-t border-gray-200">
+                    <button type="button" onclick="closeFacilityModal()" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors">
+                        Batal
+                    </button>
+                    <button type="button" onclick="saveFacility()" class="px-4 py-2 text-sm font-medium text-white bg-primary hover:bg-blue-600 border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors">
+                        <i class="fas fa-save mr-2"></i>Simpan Fasilitas
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
