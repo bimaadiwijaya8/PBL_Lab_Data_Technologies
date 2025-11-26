@@ -3,102 +3,385 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Editor Dashboard (Visual) – Lab Data Technologies</title>
+  <title>Editor Dashboard – Lab Data Technologies</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
-  <style>body{font-family:Inter,system-ui,sans-serif}</style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    html { transition: opacity .16s ease; }
+    html:not(.is-loaded) { opacity: 0; }
+    .sidebar-collapsed { width: 80px; }
+    .sidebar-collapsed .sidebar-text { display: none; }
+    .sidebar-collapsed .sidebar-logo-text { display: none; }
+  </style>
 </head>
-<body class="bg-gray-50 text-gray-900">
-  <div class="flex min-h-screen">
-    <aside class="w-64 bg-white border-r border-gray-100 hidden md:block">
-      <div class="h-16 flex items-center px-4 gap-2 border-b"><span class="h-8 w-8 rounded-lg bg-[#00A0D6] text-white flex items-center justify-center font-bold">DT</span><span class="font-semibold">Editor</span></div>
-      <nav class="p-3 text-sm">
-        <a href="#berita" class="block px-3 py-2 rounded-lg hover:bg-gray-50">Berita</a>
-        <a href="#publikasi" class="block px-3 py-2 rounded-lg hover:bg-gray-50">Publikasi</a>
-        <a href="#anggota" class="block px-3 py-2 rounded-lg hover:bg-gray-50">Anggota</a>
+<body class="bg-gray-50 text-gray-900 antialiased">
+  <div class="min-h-screen flex">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="w-64 bg-white border-r border-gray-200 shadow-sm transition-all duration-300 ease-in-out fixed lg:relative h-full z-30">
+      <!-- Logo Section -->
+      <div class="h-16 flex items-center justify-between px-6 border-b border-gray-100">
+        <div class="flex items-center space-x-3">
+          <div class="w-8 h-8 bg-[#00A0D6] rounded-xl flex items-center justify-center">
+            <span class="text-white font-bold text-sm">DT</span>
+          </div>
+          <span class="sidebar-text font-semibold text-gray-900">Editor Panel</span>
+        </div>
+        <button id="sidebar-toggle" class="lg:hidden p-1 rounded-lg hover:bg-gray-100">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="p-4 space-y-2">
+        <a href="#" class="nav-item flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium text-[#00A0D6] bg-blue-50 border border-blue-100" data-tab="dashboard">
+          <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5a2 2 0 012-2h4a2 2 0 012 2v6H8V5z"></path>
+          </svg>
+          <span class="sidebar-text">Dashboard</span>
+        </a>
+        
+        <a href="#" class="nav-item flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:text-[#00A0D6] hover:bg-blue-50 transition-colors" data-tab="berita">
+          <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H15"></path>
+          </svg>
+          <span class="sidebar-text">Kelola Berita</span>
+        </a>
+        
+        <a href="#" class="nav-item flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:text-[#00A0D6] hover:bg-blue-50 transition-colors" data-tab="publikasi">
+          <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+          </svg>
+          <span class="sidebar-text">Kelola Publikasi</span>
+        </a>
+        
+        <a href="#" class="nav-item flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:text-[#00A0D6] hover:bg-blue-50 transition-colors" data-tab="agenda">
+          <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+          </svg>
+          <span class="sidebar-text">Kelola Agenda</span>
+        </a>
+        
+        <a href="#" class="nav-item flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:text-[#00A0D6] hover:bg-blue-50 transition-colors" data-tab="galeri">
+          <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+          </svg>
+          <span class="sidebar-text">Kelola Galeri</span>
+        </a>
       </nav>
     </aside>
-    <main class="flex-1">
-      <header class="h-16 bg-white border-b border-gray-100 flex items-center justify-between px-4">
-        <div class="font-semibold">Dashboard Editor (Visual-only)</div>
-        <div class="flex items-center gap-3 text-sm">
-          <span class="px-2 py-1 rounded-full bg-[#E6F8FD] text-[#00A0D6]">Role: Editor/Operator</span>
-          <a href="index.html" class="px-3 py-2 rounded-full border">Kembali ke Situs</a>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col lg:ml-0">
+      <!-- Top Navbar -->
+      <header class="h-16 bg-white border-b border-gray-200 shadow-sm flex items-center justify-between px-6">
+        <div class="flex items-center space-x-4">
+          <button id="mobile-menu-toggle" class="lg:hidden p-2 rounded-lg hover:bg-gray-100">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+          <h1 class="text-xl font-semibold text-gray-900">Dashboard Editor</h1>
+        </div>
+        
+        <div class="flex items-center space-x-4">
+          <span class="px-3 py-1.5 bg-green-100 text-green-700 rounded-full text-sm font-medium">Editor</span>
+          <a href="login.html" class="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-xl transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+            </svg>
+            <span>Logout</span>
+          </a>
         </div>
       </header>
 
-      <section id="berita" class="p-4 lg:p-6">
-        <div class="flex items-center justify-between">
-          <h2 class="font-semibold text-lg">Kelola Berita & Agenda</h2>
-          <button class="px-3 py-2 rounded-full bg-[#00A0D6] text-white text-sm">Tambah</button>
-        </div>
-        <div class="mt-4 grid md:grid-cols-2 xl:grid-cols-3 gap-4">
-          <div class="p-4 rounded-xl bg-white border">
-            <div class="text-xs text-gray-500">Draft • Agenda</div>
-            <div class="font-semibold mt-1">Judul Kegiatan</div>
-            <div class="mt-3 flex gap-2 text-xs">
-              <button class="px-2 py-1 rounded-full border">Edit</button>
-              <button class="px-2 py-1 rounded-full border border-red-200 text-red-600">Hapus</button>
-              <button class="px-2 py-1 rounded-full border">Ajukan Publikasi</button>
+      <!-- Main Content Area -->
+      <main class="flex-1 p-6 overflow-y-auto">
+        <!-- Dashboard Overview -->
+        <div id="tab-dashboard" class="tab-content">
+          <div class="mb-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-2">Konten Saya</h2>
+            <p class="text-gray-600">Kelola dan pantau status konten yang Anda buat</p>
+          </div>
+          
+          <!-- Content Statistics -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-sm font-medium text-gray-600">Total Berita</p>
+                  <p class="text-2xl font-bold text-gray-900">12</p>
+                </div>
+                <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                  <svg class="w-6 h-6 text-[#00A0D6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H15"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-sm font-medium text-gray-600">Pending Approval</p>
+                  <p class="text-2xl font-bold text-yellow-600">3</p>
+                </div>
+                <div class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center">
+                  <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-sm font-medium text-gray-600">Approved</p>
+                  <p class="text-2xl font-bold text-green-600">8</p>
+                </div>
+                <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+                  <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-sm font-medium text-gray-600">Rejected</p>
+                  <p class="text-2xl font-bold text-red-600">1</p>
+                </div>
+                <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
+                  <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="p-4 rounded-xl bg-white border">
-            <div class="text-xs text-gray-500">Published • Berita</div>
-            <div class="font-semibold mt-1">Kolaborasi Industri</div>
-            <div class="mt-3 flex gap-2 text-xs">
-              <button class="px-2 py-1 rounded-full border">Perbarui</button>
-              <button class="px-2 py-1 rounded-full border border-red-200 text-red-600">Hapus</button>
+          
+          <!-- Recent Content -->
+          <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Konten Terbaru</h3>
+            <div class="space-y-4">
+              <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                <div class="flex-1">
+                  <p class="text-sm font-medium text-gray-900">Workshop Machine Learning 2025</p>
+                  <p class="text-xs text-gray-500">Berita • 2 jam yang lalu</p>
+                </div>
+                <span class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-medium">Pending</span>
+              </div>
+              <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                <div class="flex-1">
+                  <p class="text-sm font-medium text-gray-900">Seminar Data Science Terapan</p>
+                  <p class="text-xs text-gray-500">Agenda • 1 hari yang lalu</p>
+                </div>
+                <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">Approved</span>
+              </div>
+              <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                <div class="flex-1">
+                  <p class="text-sm font-medium text-gray-900">Dokumentasi Workshop AI</p>
+                  <p class="text-xs text-gray-500">Galeri • 3 hari yang lalu</p>
+                </div>
+                <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">Approved</span>
+              </div>
             </div>
           </div>
         </div>
-      </section>
 
-      <section id="publikasi" class="p-4 lg:p-6 border-t">
-        <div class="flex items-center justify-between">
-          <h2 class="font-semibold text-lg">Kelola Publikasi</h2>
-          <button class="px-3 py-2 rounded-full bg-[#6AC259] text-white text-sm">Tambah</button>
+        <!-- Kelola Berita -->
+        <div id="tab-berita" class="tab-content hidden">
+          <div class="mb-6 flex justify-between items-center">
+            <div>
+              <h2 class="text-2xl font-bold text-gray-900 mb-2">Kelola Berita & Pengumuman</h2>
+              <p class="text-gray-600">Buat dan kelola berita serta pengumuman laboratorium</p>
+            </div>
+            <button onclick="openModal('berita')" class="px-4 py-2 bg-[#00A0D6] text-white rounded-xl hover:bg-blue-600 transition-colors font-medium">
+              <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+              </svg>
+              Tambah Berita
+            </button>
+          </div>
+          
+          <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full">
+                <thead class="bg-gray-50 border-b border-gray-200">
+                  <tr>
+                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Judul</th>
+                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Kategori</th>
+                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Tanggal</th>
+                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Status</th>
+                    <th class="text-center py-3 px-4 font-semibold text-gray-700">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="editor-berita-table" class="divide-y divide-gray-200">
+                  <!-- Data will be populated by JavaScript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-        <div class="mt-4 overflow-hidden rounded-xl border bg-white">
-          <table class="w-full text-sm">
-            <thead class="bg-gray-50 text-gray-600"><tr><th class="p-3 text-left">Judul</th><th class="p-3 text-left">Tipe</th><th class="p-3 text-left">Status</th><th class="p-3">Aksi</th></tr></thead>
-            <tbody>
-              <tr class="border-t"><td class="p-3">Journal of Data Tech</td><td class="p-3">Jurnal</td><td class="p-3"><span class="px-2 py-1 rounded-full bg-gray-100">Published</span></td><td class="p-3 text-right space-x-2"><button class="px-2 py-1 rounded-full border">Edit</button><button class="px-2 py-1 rounded-full border border-red-200 text-red-600">Hapus</button></td></tr>
-              <tr class="border-t"><td class="p-3">Conf on Smart Systems</td><td class="p-3">Proceeding</td><td class="p-3"><span class="px-2 py-1 rounded-full bg-gray-100">Draft</span></td><td class="p-3 text-right space-x-2"><button class="px-2 py-1 rounded-full border">Edit</button><button class="px-2 py-1 rounded-full border">Kirim Review</button></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
 
-      <section id="anggota" class="p-4 lg:p-6 border-t">
-        <div class="flex items-center justify-between">
-          <h2 class="font-semibold text-lg">Kelola Anggota</h2>
-          <div class="flex gap-2">
-            <button class="px-3 py-2 rounded-full bg-[#00A0D6] text-white text-sm">Tambah</button>
-            <button class="px-3 py-2 rounded-full border text-sm">Pindah Lab</button>
+        <!-- Kelola Publikasi -->
+        <div id="tab-publikasi" class="tab-content hidden">
+          <div class="mb-6 flex justify-between items-center">
+            <div>
+              <h2 class="text-2xl font-bold text-gray-900 mb-2">Kelola Publikasi</h2>
+              <p class="text-gray-600">Tambahkan publikasi dan jurnal penelitian</p>
+            </div>
+            <button onclick="openModal('publikasi')" class="px-4 py-2 bg-[#00A0D6] text-white rounded-xl hover:bg-blue-600 transition-colors font-medium">
+              <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+              </svg>
+              Tambah Publikasi
+            </button>
           </div>
-        </div>
-        <div class="mt-4 grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
-          <div class="p-4 rounded-xl bg-white border">
-            <div class="font-semibold">Nama Member</div>
-            <div class="text-xs text-gray-500">Asisten</div>
-            <div class="mt-3 flex gap-2 text-xs">
-              <button class="px-2 py-1 rounded-full border">Ubah</button>
-              <button class="px-2 py-1 rounded-full border border-red-200 text-red-600">Hapus</button>
-              <button class="px-2 py-1 rounded-full border">Tandai Keluar</button>
+          
+          <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full">
+                <thead class="bg-gray-50 border-b border-gray-200">
+                  <tr>
+                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Judul</th>
+                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Penulis</th>
+                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Tahun</th>
+                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Status</th>
+                    <th class="text-center py-3 px-4 font-semibold text-gray-700">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="editor-publikasi-table" class="divide-y divide-gray-200">
+                  <!-- Data will be populated by JavaScript -->
+                </tbody>
+              </table>
             </div>
           </div>
-          <div class="p-4 rounded-xl bg-white border">
-            <div class="font-semibold">Nama Member</div>
-            <div class="text-xs text-gray-500">Mahasiswa Peneliti</div>
-            <div class="mt-3 flex gap-2 text-xs">
-              <button class="px-2 py-1 rounded-full border">Ubah</button>
-              <button class="px-2 py-1 rounded-full border border-red-200 text-red-600">Hapus</button>
+        </div>
+
+        <!-- Kelola Agenda -->
+        <div id="tab-agenda" class="tab-content hidden">
+          <div class="mb-6 flex justify-between items-center">
+            <div>
+              <h2 class="text-2xl font-bold text-gray-900 mb-2">Kelola Agenda</h2>
+              <p class="text-gray-600">Buat dan kelola jadwal kegiatan</p>
+            </div>
+            <button onclick="openModal('agenda')" class="px-4 py-2 bg-[#00A0D6] text-white rounded-xl hover:bg-blue-600 transition-colors font-medium">
+              <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+              </svg>
+              Tambah Agenda
+            </button>
+          </div>
+          
+          <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full">
+                <thead class="bg-gray-50 border-b border-gray-200">
+                  <tr>
+                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Nama Kegiatan</th>
+                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Tanggal</th>
+                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Lokasi</th>
+                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Status</th>
+                    <th class="text-center py-3 px-4 font-semibold text-gray-700">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="editor-agenda-table" class="divide-y divide-gray-200">
+                  <!-- Data will be populated by JavaScript -->
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-        <div class="mt-4 text-xs text-gray-500">Catatan: Editor dapat mengubah atau menghapus member jika keluar (visual-only).</div>
-      </section>
-    </main>
+
+        <!-- Kelola Galeri -->
+        <div id="tab-galeri" class="tab-content hidden">
+          <div class="mb-6 flex justify-between items-center">
+            <div>
+              <h2 class="text-2xl font-bold text-gray-900 mb-2">Kelola Galeri</h2>
+              <p class="text-gray-600">Upload dan kelola foto dokumentasi</p>
+            </div>
+            <button onclick="openModal('galeri')" class="px-4 py-2 bg-[#00A0D6] text-white rounded-xl hover:bg-blue-600 transition-colors font-medium">
+              <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+              </svg>
+              Tambah Foto
+            </button>
+          </div>
+          
+          <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full">
+                <thead class="bg-gray-50 border-b border-gray-200">
+                  <tr>
+                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Foto</th>
+                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Nama</th>
+                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Deskripsi</th>
+                    <th class="text-left py-3 px-4 font-semibold text-gray-700">Status</th>
+                    <th class="text-center py-3 px-4 font-semibold text-gray-700">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="editor-galeri-table" class="divide-y divide-gray-200">
+                  <!-- Data will be populated by JavaScript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
   </div>
+
+  <!-- Mobile Sidebar Overlay -->
+  <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-20 lg:hidden hidden"></div>
+
+  <!-- Universal Modal for CRUD Operations -->
+  <div id="crud-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between p-6 border-b border-gray-200">
+        <h3 id="modal-title" class="text-lg font-semibold text-gray-900">Tambah Data</h3>
+        <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      
+      <form id="crud-form" class="p-6 space-y-4">
+        <div id="form-fields">
+          <!-- Dynamic form fields will be inserted here -->
+        </div>
+        
+        <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+          <button type="button" onclick="closeModal()" class="px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors">
+            Batal
+          </button>
+          <button type="submit" class="px-4 py-2 bg-[#00A0D6] text-white hover:bg-blue-600 rounded-xl transition-colors">
+            Simpan & Kirim untuk Persetujuan
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed top-4 right-4 z-50 hidden">
+    <div class="bg-yellow-500 text-white px-6 py-3 rounded-xl shadow-lg">
+      <div class="flex items-center space-x-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <span id="toast-message">Data berhasil disimpan dan menunggu persetujuan admin!</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
 </body>
 </html>

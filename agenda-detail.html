@@ -3,10 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fasilitas – Lab Data Technologies</title>
+  <title>Detail Agenda – Lab Data Technologies</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>body{font-family:Inter,system-ui,sans-serif} html{transition:opacity .16s ease} html:not(.is-loaded){opacity:0}</style>
+  <style>
+    body{font-family:Inter,system-ui,sans-serif} 
+    html{transition:opacity .16s ease} 
+    html:not(.is-loaded){opacity:0}
+  </style>
 </head>
 <body class="bg-white text-gray-900">
   <header class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-gray-100">
@@ -22,10 +26,10 @@
         <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
           <a class="hover:text-sky-600 hover:underline" href="index.html">Beranda</a>
           <a class="hover:text-sky-600 hover:underline" href="profil-lab.html">Profil Lab</a>
-          <a class="hover:text-sky-600 hover:underline" href="berita.html">Berita</a>
+          <a class="text-sky-600 font-semibold" href="berita.html">Berita</a>
           <a class="hover:text-sky-600 hover:underline" href="galeri.html">Galeri</a>
           <a class="hover:text-sky-600 hover:underline" href="penelitian.html">Publikasi</a>
-          <a class="text-sky-600 font-semibold" href="fasilitas.html">Fasilitas</a>
+          <a class="hover:text-sky-600 hover:underline" href="fasilitas.html">Fasilitas</a>
           <a class="hover:text-sky-600 hover:underline" href="anggota.html">Anggota</a>
           <a class="hover:text-sky-600 hover:underline" href="kontak.html">Kontak</a>
         </nav>
@@ -37,10 +41,10 @@
         <div class="grid gap-2 text-sm font-medium">
           <a class="py-2 hover:text-sky-600" href="index.html">Beranda</a>
           <a class="py-2 hover:text-sky-600" href="profil-lab.html">Profil Lab</a>
-          <a class="py-2 hover:text-sky-600" href="berita.html">Berita</a>
+          <a class="py-2 text-sky-600 font-semibold" href="berita.html">Berita</a>
           <a class="py-2 hover:text-sky-600" href="galeri.html">Galeri</a>
           <a class="py-2 hover:text-sky-600" href="penelitian.html">Publikasi</a>
-          <a class="py-2 text-sky-600 font-semibold" href="fasilitas.html">Fasilitas</a>
+          <a class="py-2 hover:text-sky-600" href="fasilitas.html">Fasilitas</a>
           <a class="py-2 hover:text-sky-600" href="anggota.html">Anggota</a>
           <a class="py-2 hover:text-sky-600" href="kontak.html">Kontak</a>
         </div>
@@ -49,17 +53,34 @@
   </header>
 
   <main>
-    <section class="bg-gradient-to-r from-[#E9F7EE] to-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 class="text-3xl font-semibold">Fasilitas Laboratorium</h1>
-        <p class="text-gray-600 mt-2">Perangkat keras, perangkat lunak, jaringan, dan ruang pembelajaran</p>
+    <!-- Breadcrumb -->
+    <section class="bg-gray-50 border-b">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <nav class="flex items-center gap-2 text-sm text-gray-600">
+          <a href="index.html" class="hover:text-[#00A0D6]">Beranda</a>
+          <span>›</span>
+          <a href="berita.html" class="hover:text-[#00A0D6]">Berita</a>
+          <span>›</span>
+          <span class="text-gray-900" id="breadcrumb-title">Detail Agenda</span>
+        </nav>
       </div>
     </section>
 
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 class="text-3xl font-semibold mb-6">Fasilitas</h1>
-      <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" data-facilities-container>
-        <!-- Facilities will be rendered here from localStorage -->
+    <!-- Agenda Content -->
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div id="agenda-detail-content">
+        <!-- Content will be loaded here -->
+        <div class="text-center py-20">
+          <div class="text-gray-500">Memuat konten...</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Related Agenda -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 border-t">
+      <h2 class="text-2xl font-semibold mb-6">Agenda Lainnya</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="related-agenda">
+        <!-- Related agenda will be loaded here -->
       </div>
     </section>
   </main>

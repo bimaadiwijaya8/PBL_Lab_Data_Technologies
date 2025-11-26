@@ -6,56 +6,206 @@
   <title>Anggota – Lab Data Technologies</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>body{font-family:Inter,system-ui,sans-serif}</style>
+  <style>body{font-family:Inter,system-ui,sans-serif} html{transition:opacity .16s ease} html:not(.is-loaded){opacity:0}</style>
 </head>
 <body class="bg-white text-gray-900">
   <header class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-3"><span class="inline-flex h-8 w-8 rounded-lg bg-[#00A0D6] items-center justify-center text-white font-bold">DT</span><span class="font-semibold">Lab Data Technologies</span></a>
-      <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
-        <a href="index.html" class="hover:text-[#00A0D6]">Home</a>
-        <a href="profil.html" class="hover:text-[#00A0D6]">Profil</a>
-        <a href="fasilitas.html" class="hover:text-[#00A0D6]">Fasilitas</a>
-        <a href="penelitian.html" class="hover:text-[#00A0D6]">Penelitian</a>
-        <a href="berita.html" class="hover:text-[#00A0D6]">Berita</a>
-        <a href="galeri.html" class="hover:text-[#00A0D6]">Galeri</a>
-        <a href="anggota.html" class="text-[#00A0D6]">Anggota</a>
-        <a href="kontak.html" class="hover:text-[#00A0D6]">Kontak</a>
-      </nav>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="index.html" class="flex items-center gap-3">
+          <span class="inline-flex h-8 w-8 rounded-lg bg-[#00A0D6] items-center justify-center text-white font-bold">DT</span>
+          <div class="leading-tight">
+            <div class="font-semibold">Laboratorium Data Technologies</div>
+            <div class="text-xs text-gray-500">Politeknik Negeri Malang</div>
+          </div>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+          <a class="hover:text-sky-600 hover:underline" href="index.html">Beranda</a>
+          <a class="hover:text-sky-600 hover:underline" href="profil-lab.html">Profil Lab</a>
+          <a class="hover:text-sky-600 hover:underline" href="berita.html">Berita</a>
+          <a class="hover:text-sky-600 hover:underline" href="galeri.html">Galeri</a>
+          <a class="hover:text-sky-600 hover:underline" href="penelitian.html">Publikasi</a>
+          <a class="hover:text-sky-600 hover:underline" href="fasilitas.html">Fasilitas</a>
+          <a class="text-sky-600 font-semibold" href="anggota.html">Anggota</a>
+          <a class="hover:text-sky-600 hover:underline" href="kontak.html">Kontak</a>
+        </nav>
+        <button class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-md border border-gray-200" data-nav-toggle="#mnav">
+          <span class="i">☰</span>
+        </button>
+      </div>
+      <div id="mnav" class="md:hidden hidden pb-4">
+        <div class="grid gap-2 text-sm font-medium">
+          <a class="py-2 hover:text-sky-600" href="index.html">Beranda</a>
+          <a class="py-2 hover:text-sky-600" href="profil-lab.html">Profil Lab</a>
+          <a class="py-2 hover:text-sky-600" href="berita.html">Berita</a>
+          <a class="py-2 hover:text-sky-600" href="galeri.html">Galeri</a>
+          <a class="py-2 hover:text-sky-600" href="penelitian.html">Publikasi</a>
+          <a class="py-2 hover:text-sky-600" href="fasilitas.html">Fasilitas</a>
+          <a class="py-2 text-sky-600 font-semibold" href="anggota.html">Anggota</a>
+          <a class="py-2 hover:text-sky-600" href="kontak.html">Kontak</a>
+        </div>
+      </div>
     </div>
   </header>
 
   <main>
     <section class="bg-gradient-to-r from-[#E6F8FD] to-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 class="text-3xl font-semibold">Anggota</h1>
-        <p class="text-gray-600 mt-2">Dosen, laboran, asisten, dan mahasiswa peneliti</p>
+        <h1 class="text-3xl font-semibold">Anggota Laboratorium</h1>
+        <p class="text-gray-600 mt-2">Daftar staf dan mahasiswa yang tergabung dalam Laboratorium Data Technologies.</p>
       </div>
     </section>
 
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="p-5 rounded-xl border border-gray-200 hover:shadow-lg hover:scale-[1.02] transition">
-          <img class="w-16 h-16 rounded-full object-cover" src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=400&auto=format&fit=crop" alt="Member" />
-          <div class="mt-3 font-semibold">Nama Dosen A</div>
-          <div class="text-sm text-gray-600">Bidang: Data Mining</div>
-        </div>
-        <div class="p-5 rounded-xl border border-gray-200 hover:shadow-lg hover:scale-[1.02] transition">
-          <img class="w-16 h-16 rounded-full object-cover" src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=400&auto=format&fit=crop" alt="Member" />
-          <div class="mt-3 font-semibold">Nama Laboran 1</div>
-          <div class="text-sm text-gray-600">Laboran</div>
-        </div>
-        <div class="p-5 rounded-xl border border-gray-200 hover:shadow-lg hover:scale-[1.02] transition">
-          <img class="w-16 h-16 rounded-full object-cover" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop" alt="Member" />
-          <div class="mt-3 font-semibold">Nama Asisten</div>
-          <div class="text-sm text-gray-600">Asisten Praktikum</div>
+      <!-- Active Members Display -->
+      <div class="mb-10">
+        <h2 class="text-2xl font-semibold mb-2">Dosen & Staff</h2>
+        <p class="text-sm text-gray-600 mb-6">Tim pengajar dan pengelola laboratorium</p>
+        <div id="dosen-staff-list" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      </div>
+
+      <div class="mb-12">
+        <h2 class="text-2xl font-semibold mb-2">Mahasiswa</h2>
+        <p class="text-sm text-gray-600 mb-6">Asisten laboratorium dan mahasiswa peneliti</p>
+        <div id="mahasiswa-list" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      </div>
+
+      <!-- Registration Section -->
+      <div class="border-t pt-12">
+        <div class="text-center mb-8">
+          <h2 class="text-2xl font-semibold mb-4">Bergabung dengan Laboratorium</h2>
+          <p class="text-gray-600 mb-6">Ingin menjadi bagian dari tim? Daftarkan diri Anda sebagai anggota laboratorium.</p>
+          <button id="register-btn" class="bg-[#00A0D6] text-white rounded-full py-3 px-6 hover:scale-[1.02] transition font-medium">
+            Daftar Jadi Member
+          </button>
         </div>
       </div>
     </section>
+
+    <!-- Registration Modal -->
+    <div id="registration-modal" class="modal-backdrop hidden fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
+      <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div class="p-6 border-b">
+          <div class="flex items-center justify-between">
+            <h3 class="text-xl font-semibold">Pendaftaran Member Laboratorium</h3>
+            <button data-modal-close="#registration-modal" class="text-gray-400 hover:text-gray-600">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        
+        <form id="registration-form" class="p-6 space-y-6">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap *</label>
+              <input type="text" id="reg-name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A0D6] focus:border-transparent" placeholder="Masukkan nama lengkap">
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">NIM *</label>
+              <input type="text" id="reg-nim" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A0D6] focus:border-transparent" placeholder="Contoh: 2241720001">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Foto Profil</label>
+            <input type="file" id="reg-photo" accept=".jpg,.jpeg,.png" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A0D6] focus:border-transparent">
+            <p class="text-xs text-gray-500 mt-1">Format: JPG, PNG. Maksimal 2MB</p>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Jurusan *</label>
+              <select id="reg-jurusan" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A0D6] focus:border-transparent">
+                <option value="">Pilih Jurusan</option>
+                <option value="Teknik Informatika">Teknik Informatika</option>
+                <option value="Sistem Informasi Bisnis">Sistem Informasi Bisnis</option>
+                <option value="Teknik Komputer dan Jaringan">Teknik Komputer dan Jaringan</option>
+              </select>
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Program Studi *</label>
+              <select id="reg-prodi" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A0D6] focus:border-transparent">
+                <option value="">Pilih Program Studi</option>
+                <option value="TI">Teknik Informatika (TI)</option>
+                <option value="SIB">Sistem Informasi Bisnis (SIB)</option>
+                <option value="TKJ">Teknik Komputer dan Jaringan (TKJ)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Kelas *</label>
+              <input type="text" id="reg-kelas" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A0D6] focus:border-transparent" placeholder="Contoh: TI-3A">
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Tahun Angkatan *</label>
+              <input type="number" id="reg-tahun" required min="2020" max="2030" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A0D6] focus:border-transparent" placeholder="Contoh: 2024">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Nomor Telepon *</label>
+            <input type="tel" id="reg-tel" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00A0D6] focus:border-transparent" placeholder="Contoh: 08123456789">
+          </div>
+
+          <div class="flex gap-4 pt-4">
+            <button type="button" data-modal-close="#registration-modal" class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition">
+              Batal
+            </button>
+            <button type="submit" class="flex-1 px-4 py-2 bg-[#00A0D6] text-white rounded-lg hover:bg-[#0090C0] transition">
+              Kirim Pendaftaran
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   </main>
 
   <footer class="mt-10 border-t border-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-sm text-gray-600">© 2025 Lab Data Technologies</div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="grid md:grid-cols-4 gap-8 text-sm">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="inline-flex h-8 w-8 rounded-lg bg-[#00A0D6] items-center justify-center text-white font-bold">DT</span>
+            <div class="font-semibold">Lab Data Technologies</div>
+          </div>
+          <p class="mt-3 text-gray-600">Portal riset dan akademik.</p>
+        </div>
+        <div>
+          <div class="font-semibold">Navigasi</div>
+          <ul class="mt-3 space-y-2 text-gray-600">
+            <li><a href="profil-lab.html" class="hover:text-[#00A0D6]">Profil</a></li>
+            <li><a href="fasilitas.html" class="hover:text-[#00A0D6]">Fasilitas</a></li>
+            <li><a href="penelitian.html" class="hover:text-[#00A0D6]">Publikasi</a></li>
+            <li><a href="berita.html" class="hover:text-[#00A0D6]">Berita</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="font-semibold">Kontak</div>
+          <ul class="mt-3 space-y-2 text-gray-600">
+            <li>Email: lab.dt@polinema.ac.id</li>
+            <li>Telp: (0341) 404040</li>
+            <li>Alamat: Jl. Soekarno Hatta, Malang</li>
+          </ul>
+        </div>
+        <div>
+          <div class="font-semibold">Media Sosial</div>
+          <div class="mt-3 flex gap-3">
+            <a class="h-9 w-9 rounded-full bg-gray-100 inline-flex items-center justify-center" href="#">in</a>
+            <a class="h-9 w-9 rounded-full bg-gray-100 inline-flex items-center justify-center" href="#">yt</a>
+            <a class="h-9 w-9 rounded-full bg-gray-100 inline-flex items-center justify-center" href="#">ig</a>
+          </div>
+        </div>
+      </div>
+      <div class="mt-8 pt-6 border-t border-gray-100 text-xs text-gray-500">© 2025 Laboratorium Data Technologies – Politeknik Negeri Malang</div>
+    </div>
   </footer>
+  <script src="./app.js"></script>
 </body>
 </html>
