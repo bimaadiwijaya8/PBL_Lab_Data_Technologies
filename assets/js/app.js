@@ -1009,8 +1009,87 @@ function loadGaleriData(data) {
   console.log('Loading galeri data:', data);
 }
 
+// ===== CONTACT FORM FUNCTIONS =====
+function initContactForm() {
+  const formTabs = document.querySelectorAll('.pill-switch-btn');
+  const askForm = document.getElementById('form-ask');
+  const coopForm = document.getElementById('form-coop');
+  
+  // Handle file input change for proposal
+  const fileInput = document.getElementById('coop-proposal');
+  const fileNameDisplay = document.getElementById('file-name');
+  
+  if (fileInput && fileNameDisplay) {
+    fileInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        // Check file size (5MB max)
+        const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+        if (file.size > maxSize) {
+          showToast('Ukuran file melebihi 5MB. Silakan pilih file yang lebih kecil.');
+          this.value = ''; // Reset file input
+          fileNameDisplay.textContent = 'Klik untuk memilih file';
+          return;
+        }
+        
+        // Update file name display
+        fileNameDisplay.textContent = file.name;
+        fileNameDisplay.classList.remove('text-gray-500');
+        fileNameDisplay.classList.add('text-gray-900', 'font-medium');
+      } else {
+        fileNameDisplay.textContent = 'Klik untuk memilih file';
+        fileNameDisplay.classList.remove('text-gray-900', 'font-medium');
+        fileNameDisplay.classList.add('text-gray-500');
+      }
+    });
+  }
+  
+  if (!formTabs.length || !askForm || !coopForm) return;
+  
+  function switchForm(activeTab) {
+    // Update active tab
+    formTabs.forEach(tab => tab.classList.remove('active'));
+    activeTab.classList.add('active');
+    
+    // Show/hide forms
+    if (activeTab.dataset.formType === 'ask') {
+      askForm.classList.remove('hidden');
+      coopForm.classList.add('hidden');
+    } else {
+      askForm.classList.add('hidden');
+      coopForm.classList.remove('hidden');
+    }
+  }
+  
+  // Add click event listeners to tabs
+  formTabs.forEach(tab => {
+    tab.addEventListener('click', () => switchForm(tab));
+  });
+  
+  // Handle form submission
+  const contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const activeTab = document.querySelector('.pill-switch-btn.active');
+      const formType = activeTab ? activeTab.dataset.formType : 'ask';
+      
+      // Show success message
+      showToast('Pesan Anda berhasil dikirim!');
+      
+      // Reset form
+      this.reset();
+    });
+  }
+}
+
 // ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
+  // Initialize contact form if on contact page
+  if (document.querySelector('.pill-switch-btn')) {
+    initContactForm();
+  }
+  
   // Initialize member dashboard if on member dashboard page
   if (document.getElementById('member-dashboard')) {
     initializeMemberDashboard();

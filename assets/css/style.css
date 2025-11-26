@@ -172,3 +172,367 @@ html:not(.is-loaded) {
 .animate-slide-down {
   animation: slideDown 0.3s ease-out forwards;
 }
+
+/* ========== EDIT MODE STYLES ========== */
+
+/* Edit Mode Container */
+body.edit-mode {
+  background-color: #f0f7ff;
+}
+
+body.edit-mode::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 160, 214, 0.03) 0%, rgba(106, 194, 89, 0.03) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Edit Mode Toolbar */
+.edit-mode-toolbar {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  padding: 16px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  animation: slideInRight 0.4s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.edit-mode-toolbar button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.edit-mode-toolbar .btn-save {
+  background: linear-gradient(135deg, #00A0D6, #0078A6);
+  color: white;
+}
+
+.edit-mode-toolbar .btn-save:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 160, 214, 0.4);
+}
+
+.edit-mode-toolbar .btn-cancel {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+}
+
+.edit-mode-toolbar .btn-cancel:hover {
+  background: #e5e7eb;
+  border-color: #d1d5db;
+}
+
+.edit-mode-toolbar .mode-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #fef3c7;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #92400e;
+}
+
+.edit-mode-toolbar .mode-indicator::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: #fbbf24;
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Edit Icon Styles */
+.edit-icon {
+  display: none;
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #00A0D6, #0078A6);
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 160, 214, 0.3);
+  transition: all 0.3s ease;
+  z-index: 100;
+  border: none;
+  padding: 0;
+  line-height: 1;
+}
+
+.edit-icon:hover {
+  transform: scale(1.1) rotate(-5deg);
+  box-shadow: 0 8px 20px rgba(0, 160, 214, 0.5);
+}
+
+.edit-icon:active {
+  transform: scale(0.95);
+}
+
+/* Show edit icons in edit mode */
+.edit-mode .edit-icon {
+  display: flex;
+}
+
+/* Editable Element Styles */
+.editable-element {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.edit-mode .editable-element {
+  border: 2px dashed rgba(0, 160, 214, 0.3);
+  border-radius: 6px;
+  padding: 8px;
+}
+
+.edit-mode .editable-element:hover {
+  border-color: rgba(0, 160, 214, 0.6);
+  background: rgba(0, 160, 214, 0.05);
+}
+
+/* Edit Popup Modal */
+.edit-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  padding: 32px;
+  max-width: 500px;
+  width: 90%;
+  z-index: 2000;
+  animation: popupSlideIn 0.3s ease-out;
+}
+
+.edit-popup.active {
+  display: block;
+}
+
+@keyframes popupSlideIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.edit-popup-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1999;
+}
+
+.edit-popup-overlay.active {
+  display: block;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.edit-popup h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 24px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.edit-popup h3::before {
+  content: '✎';
+  color: #00A0D6;
+  font-size: 24px;
+}
+
+.edit-popup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.edit-popup-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.edit-popup-form-group label {
+  font-weight: 600;
+  color: #374151;
+  font-size: 14px;
+}
+
+.edit-popup-form-group input[type="text"],
+.edit-popup-form-group input[type="file"],
+.edit-popup-form-group textarea,
+.edit-popup-form-group select {
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.edit-popup-form-group input[type="text"]:focus,
+.edit-popup-form-group input[type="file"]:focus,
+.edit-popup-form-group textarea:focus,
+.edit-popup-form-group select:focus {
+  outline: none;
+  border-color: #00A0D6;
+  box-shadow: 0 0 0 3px rgba(0, 160, 214, 0.1);
+}
+
+.edit-popup-form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.edit-popup-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  justify-content: flex-end;
+}
+
+.edit-popup-buttons button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.edit-popup-buttons .save-edit {
+  background: linear-gradient(135deg, #00A0D6, #0078A6);
+  color: white;
+}
+
+.edit-popup-buttons .save-edit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 160, 214, 0.4);
+}
+
+.edit-popup-buttons .cancel-edit {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+}
+
+.edit-popup-buttons .cancel-edit:hover {
+  background: #e5e7eb;
+  border-color: #d1d5db;
+}
+
+/* Back to Dashboard Button */
+.back-to-dashboard {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 999;
+  background: white;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  font-size: 24px;
+  color: #00A0D6;
+}
+
+.back-to-dashboard:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(0, 160, 214, 0.3);
+}
+
+/* Success Message */
+.edit-success-message {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  background: linear-gradient(135deg, #6AC259, #4BAE45);
+  color: white;
+  padding: 16px 24px;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(106, 194, 89, 0.3);
+  z-index: 2001;
+  animation: slideInRight 0.3s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .edit-mode-toolbar {
+    top: 10px;
+    right: 10px;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .edit-popup {
+    padding: 24px;
+    max-width: 90%;
+  }
+
+  .back-to-dashboard {
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+  }
+}

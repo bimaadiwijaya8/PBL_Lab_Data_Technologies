@@ -93,6 +93,12 @@
                 </svg>
                 <span class="font-medium">Kelola Pengumuman</span>
             </a>
+            <a href="#edit-halaman" class="flex items-center px-3 py-3 text-gray-700 hover:bg-gray-50 hover:text-primary rounded-lg mb-1 transition-all duration-200 sidebar-link">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                </svg>
+                <span class="font-medium">Edit Halaman</span>
+            </a>
             
             <div class="border-t border-gray-200 mt-4 pt-4">
                 <a href="#" onclick="logout()" class="flex items-center px-3 py-3 text-gray-700 hover:bg-red-50 hover:text-red-500 rounded-lg transition-all duration-200">
@@ -144,6 +150,104 @@
 
         <!-- Content Area -->
         <main class="p-6">
+            <!-- Edit Halaman Section -->
+            <div id="edit-halaman-section" class="content-section hidden">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Edit Halaman</h2>
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+                        <p class="text-blue-700">Pilih halaman yang ingin diedit. Halaman akan dibuka dalam mode edit visual dengan ikon edit pada setiap elemen penting.</p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Beranda -->
+                        <a href="../index.html?edit=true" class="group p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg hover:from-blue-100 hover:to-blue-200 transition-all duration-300 border border-blue-200 hover:shadow-lg">
+                            <div class="text-3xl mb-3">🏠</div>
+                            <h3 class="font-bold text-gray-900 mb-2">Beranda</h3>
+                            <p class="text-sm text-gray-600 mb-4">Edit hero section, tentang lab, dan berita terbaru</p>
+                            <span class="inline-flex items-center text-primary font-semibold group-hover:translate-x-1 transition-transform">
+                                Edit Mode →
+                            </span>
+                        </a>
+
+                        <!-- Profil Lab -->
+                        <a href="profil-lab.html?edit=true" class="group p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-lg hover:from-green-100 hover:to-green-200 transition-all duration-300 border border-green-200 hover:shadow-lg">
+                            <div class="text-3xl mb-3">📋</div>
+                            <h3 class="font-bold text-gray-900 mb-2">Profil Lab</h3>
+                            <p class="text-sm text-gray-600 mb-4">Edit informasi profil laboratorium</p>
+                            <span class="inline-flex items-center text-secondary font-semibold group-hover:translate-x-1 transition-transform">
+                                Edit Mode →
+                            </span>
+                        </a>
+
+                        <!-- Berita -->
+                        <a href="berita.html?edit=true" class="group p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg hover:from-purple-100 hover:to-purple-200 transition-all duration-300 border border-purple-200 hover:shadow-lg">
+                            <div class="text-3xl mb-3">📰</div>
+                            <h3 class="font-bold text-gray-900 mb-2">Berita</h3>
+                            <p class="text-sm text-gray-600 mb-4">Edit konten halaman berita</p>
+                            <span class="inline-flex items-center text-purple-600 font-semibold group-hover:translate-x-1 transition-transform">
+                                Edit Mode →
+                            </span>
+                        </a>
+
+                        <!-- Galeri -->
+                        <a href="galeri.html?edit=true" class="group p-6 bg-gradient-to-br from-pink-50 to-pink-100 rounded-lg hover:from-pink-100 hover:to-pink-200 transition-all duration-300 border border-pink-200 hover:shadow-lg">
+                            <div class="text-3xl mb-3">📸</div>
+                            <h3 class="font-bold text-gray-900 mb-2">Galeri</h3>
+                            <p class="text-sm text-gray-600 mb-4">Edit konten halaman galeri</p>
+                            <span class="inline-flex items-center text-pink-600 font-semibold group-hover:translate-x-1 transition-transform">
+                                Edit Mode →
+                            </span>
+                        </a>
+
+                        <!-- Publikasi -->
+                        <a href="penelitian.html?edit=true" class="group p-6 bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg hover:from-orange-100 hover:to-orange-200 transition-all duration-300 border border-orange-200 hover:shadow-lg">
+                            <div class="text-3xl mb-3">📚</div>
+                            <h3 class="font-bold text-gray-900 mb-2">Publikasi</h3>
+                            <p class="text-sm text-gray-600 mb-4">Edit konten halaman publikasi</p>
+                            <span class="inline-flex items-center text-orange-600 font-semibold group-hover:translate-x-1 transition-transform">
+                                Edit Mode →
+                            </span>
+                        </a>
+
+                        <!-- Fasilitas -->
+                        <a href="fasilitas.html?edit=true" class="group p-6 bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-lg hover:from-cyan-100 hover:to-cyan-200 transition-all duration-300 border border-cyan-200 hover:shadow-lg">
+                            <div class="text-3xl mb-3">🏢</div>
+                            <h3 class="font-bold text-gray-900 mb-2">Fasilitas</h3>
+                            <p class="text-sm text-gray-600 mb-4">Edit konten halaman fasilitas</p>
+                            <span class="inline-flex items-center text-cyan-600 font-semibold group-hover:translate-x-1 transition-transform">
+                                Edit Mode →
+                            </span>
+                        </a>
+
+                        <!-- Anggota -->
+                        <a href="anggota.html?edit=true" class="group p-6 bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-lg hover:from-indigo-100 hover:to-indigo-200 transition-all duration-300 border border-indigo-200 hover:shadow-lg">
+                            <div class="text-3xl mb-3">👥</div>
+                            <h3 class="font-bold text-gray-900 mb-2">Anggota</h3>
+                            <p class="text-sm text-gray-600 mb-4">Edit konten halaman anggota</p>
+                            <span class="inline-flex items-center text-indigo-600 font-semibold group-hover:translate-x-1 transition-transform">
+                                Edit Mode →
+                            </span>
+                        </a>
+
+                        <!-- Kontak -->
+                        <a href="kontak.html?edit=true" class="group p-6 bg-gradient-to-br from-red-50 to-red-100 rounded-lg hover:from-red-100 hover:to-red-200 transition-all duration-300 border border-red-200 hover:shadow-lg">
+                            <div class="text-3xl mb-3">📞</div>
+                            <h3 class="font-bold text-gray-900 mb-2">Kontak</h3>
+                            <p class="text-sm text-gray-600 mb-4">Edit konten halaman kontak</p>
+                            <span class="inline-flex items-center text-red-600 font-semibold group-hover:translate-x-1 transition-transform">
+                                Edit Mode →
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="mt-8 p-4 bg-yellow-50 border-l-4 border-yellow-500 rounded">
+                        <p class="text-sm text-yellow-800">
+                            <strong>💡 Tips:</strong> Klik pada salah satu halaman di atas untuk membukanya dalam mode edit. Anda akan melihat ikon edit (✎) pada setiap elemen yang dapat diedit. Klik ikon untuk mengubah konten. Mode edit ini bersifat simulasi visual - perubahan belum disimpan ke database.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             <!-- Dashboard Section -->
             <div id="dashboard-section" class="content-section">
                 <!-- Stats Cards -->
