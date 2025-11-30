@@ -3,8 +3,47 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-// Set JSON content type
-header('Content-Type: application/json');
+// Set HTML content type
+header('Content-Type: text/html; charset=utf-8');
+
+// Function to show notification and redirect
+function showNotificationAndRedirect($type, $message) {
+    echo '<!DOCTYPE html>
+    <html>
+    <head>
+        <title>Upload Logo - Notification</title>
+        <meta http-equiv="refresh" content="2;url=' . htmlspecialchars($_SERVER['HTTP_REFERER']) . '">
+        <style>
+            .notification {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 25px;
+                border-radius: 5px;
+                color: white;
+                font-family: Arial, sans-serif;
+                z-index: 1000;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                animation: slideIn 0.5s, fadeOut 0.5s 1.5s forwards;
+            }
+            .success { background-color: #4CAF50; }
+            .error { background-color: #f44336; }
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes fadeOut {
+                from { opacity: 1; }
+                to { opacity: 0; visibility: hidden; }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="notification ' . $type . '">' . htmlspecialchars($message) . '</div>
+    </body>
+    </html>';
+    exit;
+}
 
 // Include database connection
 require_once __DIR__ . '/db_connect.php';
@@ -14,11 +53,7 @@ try {
     $pdo = getConnection();
 } catch (PDOException $e) {
     http_response_code(500);
-    echo json_encode([
-        'status' => 'error',
-        'message' => 'Database connection failed: ' . $e->getMessage()
-    ]);
-    exit;
+    showNotificationAndRedirect('error', 'Database connection failed: ' . $e->getMessage());
 }
 
 // Check if file was uploaded without errors
@@ -29,11 +64,7 @@ if (!isset($_FILES['logo_file']) || $_FILES['logo_file']['error'] !== UPLOAD_ERR
         // ... (keep existing error handling code)
     }
     http_response_code(400);
-    echo json_encode([
-        'status' => 'error',
-        'message' => $errorMessage
-    ]);
-    exit;
+    showNotificationAndRedirect('error', $errorMessage);
 }
 
 $file = $_FILES['logo_file'];
@@ -42,22 +73,14 @@ $file = $_FILES['logo_file'];
 $allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
 if (!in_array($file['type'], $allowedTypes)) {
     http_response_code(400);
-    echo json_encode([
-        'status' => 'error',
-        'message' => 'Invalid file type. Only JPG, JPEG, and PNG files are allowed.'
-    ]);
-    exit;
+    showNotificationAndRedirect('error', 'Invalid file type. Only JPG, JPEG, and PNG files are allowed.');
 }
 
 // Validate file size (2MB max)
 $maxFileSize = 2 * 1024 * 1024; // 2MB in bytes
 if ($file['size'] > $maxFileSize) {
     http_response_code(400);
-    echo json_encode([
-        'status' => 'error',
-        'message' => 'File is too large. Maximum size allowed is 2MB.'
-    ]);
-    exit;
+    showNotificationAndRedirect('error', 'File is too large. Maximum size allowed is 2MB.');
 }
 
 try {
@@ -152,11 +175,7 @@ try {
         $version = $pdo->query("SELECT EXTRACT(EPOCH FROM created_at) FROM files WHERE kategori = 'logo' LIMIT 1")->fetchColumn();
         
         $pdo->commit();
-        echo json_encode([
-            'status' => 'success',
-            'message' => 'Logo ' . ($existingLogo ? 'updated' : 'uploaded') . ' successfully.',
-            'file_path' => $filePath . '?v=' . $version
-        ]);
+        showNotificationAndRedirect('success', 'Logo ' . ($existingLogo ? 'updated' : 'uploaded') . ' successfully!');
     } else {
         $pdo->rollBack();
         throw new Exception('Failed to save logo to database.');
@@ -168,9 +187,6 @@ try {
     }
     
     http_response_code(500);
-    echo json_encode([
-        'status' => 'error',
-        'message' => 'An error occurred: ' . $e->getMessage()
-    ]);
+    showNotificationAndRedirect('error', 'An error occurred: ' . $e->getMessage());
 }
 ?>
