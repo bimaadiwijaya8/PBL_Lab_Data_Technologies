@@ -141,41 +141,37 @@ try {
     }
     imagedestroy($image);
 
-    // Check if a logo with this category already exists
-    $checkStmt = $pdo->prepare("SELECT id FROM files WHERE kategori = 'logo' LIMIT 1");
+    // Check if logo setting already exists
+    $checkStmt = $pdo->prepare("SELECT id FROM settings WHERE key = 'logo_path' LIMIT 1");
     $checkStmt->execute();
-    $existingLogo = $checkStmt->fetch(PDO::FETCH_ASSOC);
+    $existingSetting = $checkStmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($existingLogo) {
-        // Update existing logo
+    if ($existingSetting) {
+        // Update existing logo setting
         $stmt = $pdo->prepare(
-            "UPDATE files 
-            SET file_name = :file_name, 
-                file_type = :file_type,
-                file_path = :file_path,
-                created_at = CURRENT_TIMESTAMP 
-            WHERE kategori = 'logo'"
+            "UPDATE settings 
+            SET value = :file_path,
+                updated_at = CURRENT_TIMESTAMP 
+            WHERE key = 'logo_path'"
         );
     } else {
-        // Insert new logo
+        // Insert new logo setting
         $stmt = $pdo->prepare(
-            "INSERT INTO files (kategori, file_name, file_type, file_path) 
-            VALUES ('logo', :file_name, :file_type, :file_path)"
+            "INSERT INTO settings (key, value) 
+            VALUES ('logo_path', :file_path)"
         );
     }
 
     // Bind parameters
-    $stmt->bindValue(':file_name', 'logo.png', PDO::PARAM_STR);
-    $stmt->bindValue(':file_type', 'image/png', PDO::PARAM_STR);
     $stmt->bindValue(':file_path', $filePath, PDO::PARAM_STR);
 
     // Execute the query
     if ($stmt->execute()) {
         // Get the current timestamp for cache busting
-        $version = $pdo->query("SELECT EXTRACT(EPOCH FROM created_at) FROM files WHERE kategori = 'logo' LIMIT 1")->fetchColumn();
+        $version = $pdo->query("SELECT EXTRACT(EPOCH FROM updated_at) FROM settings WHERE key = 'logo_path' LIMIT 1")->fetchColumn();
         
         $pdo->commit();
-        showNotificationAndRedirect('success', 'Logo ' . ($existingLogo ? 'updated' : 'uploaded') . ' successfully!');
+        showNotificationAndRedirect('success', 'Logo ' . ($existingSetting ? 'updated' : 'uploaded') . ' successfully!');
     } else {
         $pdo->rollBack();
         throw new Exception('Failed to save logo to database.');
