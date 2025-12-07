@@ -205,21 +205,37 @@
     </section>
 
     <!-- Premium Main Content -->
-    <section id="berita-terbaru" class="py-24 bg-gradient-to-br from-gray-50/50 via-white to-blue-50/30">
+    <section id="berita-terbaru" class="py-16 bg-gradient-to-br from-gray-50/50 via-white to-blue-50/30">
       <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <!-- Filter Buttons -->
+        <div class="flex flex-wrap gap-3 mb-8">
+          <button class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition-colors bg-[#00A0D6] text-white" data-filter="all">
+            Semua
+          </button>
+          <button class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition-colors bg-white text-gray-700 hover:bg-gray-50" data-filter="berita">
+            Berita
+          </button>
+          <button class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition-colors bg-white text-gray-700 hover:bg-gray-50" data-filter="pengumuman">
+            Pengumuman
+          </button>
+          <button class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition-colors bg-white text-gray-700 hover:bg-gray-50" data-filter="agenda">
+            Agenda
+          </button>
+        </div>
+        
         <div class="grid lg:grid-cols-[1fr_380px] gap-16">
-          <!-- Premium Content Area -->
+          <!-- Main Content Area -->
           <div class="space-y-12">
-            <!-- Premium Filter Section -->
-            <div class="backdrop-blur-xl bg-white/60 border border-white/40 shadow-lg rounded-2xl p-8">
-              <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-                <div class="space-y-2">
+            <!-- Dynamic Content Section -->
+            <div id="content-area" class="space-y-6">
+              <!-- Content will be loaded dynamically here -->
+            </div>
                   <h2 class="text-3xl lg:text-4xl font-bold text-gray-900">
                     Berita & <span class="bg-gradient-to-r from-[#00A0D6] to-[#6AC259] bg-clip-text text-transparent">Pengumuman</span>
                   </h2>
                   <p class="text-lg text-gray-600 font-light">Informasi resmi dan terkini dari laboratorium</p>
                 </div>
-                <div class="flex flex-col sm:flex-row gap-4">
+                <!-- <div class="flex flex-col sm:flex-row gap-4">
                   <select id="filter-news" class="px-6 py-3 bg-white/80 backdrop-blur-xl border border-white/60 rounded-full text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#00A0D6]/30 focus:border-[#00A0D6]">
                     <option value="all">🔍 Semua Kategori</option>
                     <option value="Berita">📰 Berita</option>
@@ -230,7 +246,7 @@
                     <option value="newest">⏰ Terbaru</option>
                     <option value="oldest">📜 Terlama</option>
                   </select>
-                </div>
+                </div> -->
               </div>
             </div>
             <!-- Premium News List -->
@@ -253,7 +269,7 @@
                     Tim redaksi sedang menyiapkan berita dan pengumuman terbaru untuk Anda. 
                     <span class="font-semibold text-[#00A0D6]">Pantau terus</span> halaman ini untuk mendapatkan informasi terkini.
                   </p>
-                  
+
                   <!-- Premium Actions -->
                   <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <button onclick="location.reload()" class="inline-flex items-center gap-3 bg-gradient-to-r from-[#00A0D6] to-blue-600 text-white px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
@@ -536,5 +552,6 @@
     </div>
   </footer>
   <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/berita-module.js"></script>
 </body>
 </html>
