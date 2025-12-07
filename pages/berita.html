@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/style.css">
   <script src="../assets/js/edit-mode.js" defer></script>
+  <script src="../assets/js/load-berita.js" defer></script>
 </head>
 <body class="bg-white text-gray-900">
   <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100">
@@ -226,28 +227,11 @@
         <div class="grid lg:grid-cols-[1fr_380px] gap-16">
           <!-- Main Content Area -->
           <div class="space-y-12">
-            <!-- Dynamic Content Section -->
-            <div id="content-area" class="space-y-6">
-              <!-- Content will be loaded dynamically here -->
-            </div>
-                  <h2 class="text-3xl lg:text-4xl font-bold text-gray-900">
-                    Berita & <span class="bg-gradient-to-r from-[#00A0D6] to-[#6AC259] bg-clip-text text-transparent">Pengumuman</span>
-                  </h2>
-                  <p class="text-lg text-gray-600 font-light">Informasi resmi dan terkini dari laboratorium</p>
-                </div>
-                <!-- <div class="flex flex-col sm:flex-row gap-4">
-                  <select id="filter-news" class="px-6 py-3 bg-white/80 backdrop-blur-xl border border-white/60 rounded-full text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#00A0D6]/30 focus:border-[#00A0D6]">
-                    <option value="all">🔍 Semua Kategori</option>
-                    <option value="Berita">📰 Berita</option>
-                    <option value="Pengumuman">📢 Pengumuman</option>
-                    <option value="Agenda">📅 Agenda</option>
-                  </select>
-                  <select data-news-sort class="px-6 py-3 bg-white/80 backdrop-blur-xl border border-white/60 rounded-full text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#6AC259]/30 focus:border-[#6AC259]">
-                    <option value="newest">⏰ Terbaru</option>
-                    <option value="oldest">📜 Terlama</option>
-                  </select>
-                </div> -->
-              </div>
+            <div>
+              <h2 class="text-3xl lg:text-4xl font-bold text-gray-900">
+                Berita & <span class="bg-gradient-to-r from-[#00A0D6] to-[#6AC259] bg-clip-text text-transparent">Pengumuman</span>
+              </h2>
+              <p class="text-lg text-gray-600 font-light">Informasi resmi dan terkini dari laboratorium</p>
             </div>
             <!-- Premium News List -->
             <div id="news-list" class="space-y-8">
@@ -333,28 +317,28 @@
               </div>
               
               <div class="space-y-4">
-                <a href="#" class="group flex items-center justify-between px-6 py-4 bg-gradient-to-r from-[#00A0D6]/10 to-[#00A0D6]/5 text-[#00A0D6] rounded-full font-semibold shadow-sm hover:shadow-lg hover:from-[#00A0D6]/20 hover:to-[#00A0D6]/10 transition-all duration-300">
+                <a class="group flex items-center justify-between px-6 py-4 bg-gradient-to-r from-[#00A0D6]/10 to-[#00A0D6]/5 text-[#00A0D6] rounded-full font-semibold shadow-sm hover:shadow-lg hover:from-[#00A0D6]/20 hover:to-[#00A0D6]/10 transition-all duration-300">
                   <div class="flex items-center gap-3">
                     <div class="w-2 h-2 bg-[#00A0D6] rounded-full"></div>
                     <span>🔍 Semua Konten</span>
                   </div>
                   <span class="text-xs bg-[#00A0D6]/20 px-3 py-1 rounded-full font-bold">0</span>
                 </a>
-                <a href="#" class="group flex items-center justify-between px-6 py-4 bg-gradient-to-r from-[#6AC259]/10 to-[#6AC259]/5 text-[#6AC259] rounded-full font-semibold shadow-sm hover:shadow-lg hover:from-[#6AC259]/20 hover:to-[#6AC259]/10 transition-all duration-300">
+                <a class="group flex items-center justify-between px-6 py-4 bg-gradient-to-r from-[#6AC259]/10 to-[#6AC259]/5 text-[#6AC259] rounded-full font-semibold shadow-sm hover:shadow-lg hover:from-[#6AC259]/20 hover:to-[#6AC259]/10 transition-all duration-300">
                   <div class="flex items-center gap-3">
                     <div class="w-2 h-2 bg-[#6AC259] rounded-full"></div>
                     <span>📰 Berita</span>
                   </div>
                   <span class="text-xs bg-[#6AC259]/20 px-3 py-1 rounded-full font-bold">0</span>
                 </a>
-                <a href="#" class="group flex items-center justify-between px-6 py-4 bg-gradient-to-r from-purple-500/10 to-purple-500/5 text-purple-600 rounded-full font-semibold shadow-sm hover:shadow-lg hover:from-purple-500/20 hover:to-purple-500/10 transition-all duration-300">
+                <a class="group flex items-center justify-between px-6 py-4 bg-gradient-to-r from-purple-500/10 to-purple-500/5 text-purple-600 rounded-full font-semibold shadow-sm hover:shadow-lg hover:from-purple-500/20 hover:to-purple-500/10 transition-all duration-300">
                   <div class="flex items-center gap-3">
                     <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
                     <span>📢 Pengumuman</span>
                   </div>
                   <span class="text-xs bg-purple-500/20 px-3 py-1 rounded-full font-bold">0</span>
                 </a>
-                <a href="#" class="group flex items-center justify-between px-6 py-4 bg-gradient-to-r from-orange-500/10 to-orange-500/5 text-orange-600 rounded-full font-semibold shadow-sm hover:shadow-lg hover:from-orange-500/20 hover:to-orange-500/10 transition-all duration-300">
+                <a class="group flex items-center justify-between px-6 py-4 bg-gradient-to-r from-orange-500/10 to-orange-500/5 text-orange-600 rounded-full font-semibold shadow-sm hover:shadow-lg hover:from-orange-500/20 hover:to-orange-500/10 transition-all duration-300">
                   <div class="flex items-center gap-3">
                     <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
                     <span>📅 Agenda</span>
