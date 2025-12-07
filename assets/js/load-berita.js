@@ -80,7 +80,7 @@ function renderNewsList(berita, pengumuman) {
 function createNewsCard(item) {
   const div = document.createElement('div');
   div.className = 'news-card bg-white/80 backdrop-blur-xl border border-white/50 shadow-xl rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-300 group';
-  div.setAttribute('data-type', item.type);
+  div.setAttribute('data-type', item.type.toLowerCase());
   
   // Format tanggal
   const date = new Date(item.tanggal || item.id_pengumuman);
@@ -218,23 +218,24 @@ function renderAgenda(agenda) {
 function updateCategoryCount(berita, pengumuman, agenda) {
   const totalCount = berita.length + pengumuman.length + agenda.length;
   
-  // Update count badges - hanya update span count, label tetap ada
-  const categoryLinks = document.querySelectorAll('#kategori .space-y-4 a');
+  // Get all category links
+  const categoryLinks = document.querySelectorAll('#kategori .space-y-3 a');
   
   if (categoryLinks.length >= 4) {
-    // Semua Konten
+    // Update count for each category
+    // Semua Konten (All Content)
     const allCountSpan = categoryLinks[0].querySelector('span:last-child');
     if (allCountSpan) allCountSpan.textContent = totalCount;
     
-    // Berita
+    // Berita (News)
     const beritaCountSpan = categoryLinks[1].querySelector('span:last-child');
     if (beritaCountSpan) beritaCountSpan.textContent = berita.length;
     
-    // Pengumuman
+    // Pengumuman (Announcements)
     const pengumumanCountSpan = categoryLinks[2].querySelector('span:last-child');
     if (pengumumanCountSpan) pengumumanCountSpan.textContent = pengumuman.length;
     
-    // Agenda
+    // Agenda (Events)
     const agendaCountSpan = categoryLinks[3].querySelector('span:last-child');
     if (agendaCountSpan) agendaCountSpan.textContent = agenda.length;
   }
