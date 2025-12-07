@@ -208,21 +208,7 @@
     <!-- Premium Main Content -->
     <section id="berita-terbaru" class="py-16 bg-gradient-to-br from-gray-50/50 via-white to-blue-50/30">
       <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <!-- Filter Buttons -->
-        <div class="flex flex-wrap gap-3 mb-8">
-          <button class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition-colors bg-[#00A0D6] text-white" data-filter="all">
-            Semua
-          </button>
-          <button class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition-colors bg-white text-gray-700 hover:bg-gray-50" data-filter="berita">
-            Berita
-          </button>
-          <button class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition-colors bg-white text-gray-700 hover:bg-gray-50" data-filter="pengumuman">
-            Pengumuman
-          </button>
-          <button class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition-colors bg-white text-gray-700 hover:bg-gray-50" data-filter="agenda">
-            Agenda
-          </button>
-        </div>
+        
         
         <div class="grid lg:grid-cols-[1fr_380px] gap-16">
           <!-- Main Content Area -->
@@ -233,6 +219,23 @@
               </h2>
               <p class="text-lg text-gray-600 font-light">Informasi resmi dan terkini dari laboratorium</p>
             </div>
+
+            <!-- Filter Buttons -->
+        <div class="flex flex-wrap gap-3 mb-8">
+          <button class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition-colors bg-[#00A0D6] text-white" data-filter="all">
+            Semua
+          </button>
+          <button class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition-colors bg-white text-gray-700 hover:bg-[#00A0D6]-50" data-filter="berita">
+            Berita
+          </button>
+          <button class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition-colors bg-white text-gray-700 hover:bg-[#00A0D6]-50" data-filter="pengumuman">
+            Pengumuman
+          </button>
+          <button class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition-colors bg-white text-gray-700 hover:bg-[#00A0D6]-50" data-filter="agenda">
+            Agenda
+          </button>
+        </div>
+
             <!-- Premium News List -->
             <div id="news-list" class="space-y-8">
               <!-- Premium Empty State -->
@@ -316,34 +319,22 @@
                 </div>
               </div>
               
-              <div class="space-y-4">
-                <a class="group flex items-center justify-between px-6 py-4 bg-gradient-to-r from-[#00A0D6]/10 to-[#00A0D6]/5 text-[#00A0D6] rounded-full font-semibold shadow-sm hover:shadow-lg hover:from-[#00A0D6]/20 hover:to-[#00A0D6]/10 transition-all duration-300">
-                  <div class="flex items-center gap-3">
-                    <div class="w-2 h-2 bg-[#00A0D6] rounded-full"></div>
-                    <span>🔍 Semua Konten</span>
-                  </div>
-                  <span class="text-xs bg-[#00A0D6]/20 px-3 py-1 rounded-full font-bold">0</span>
+              <div class="space-y-3">
+                <a href="#" class="group flex items-center justify-between px-6 py-4 bg-blue-50 rounded-xl hover:bg-blue-100 transition-colors duration-200">
+                  <span class="text-gray-800 font-medium">🔍 Semua Konten</span>
+                  <span class="text-blue-600 font-semibold bg-blue-100 px-3 py-1 rounded-full text-sm">0</span>
                 </a>
-                <a class="group flex items-center justify-between px-6 py-4 bg-gradient-to-r from-[#6AC259]/10 to-[#6AC259]/5 text-[#6AC259] rounded-full font-semibold shadow-sm hover:shadow-lg hover:from-[#6AC259]/20 hover:to-[#6AC259]/10 transition-all duration-300">
-                  <div class="flex items-center gap-3">
-                    <div class="w-2 h-2 bg-[#6AC259] rounded-full"></div>
-                    <span>📰 Berita</span>
-                  </div>
-                  <span class="text-xs bg-[#6AC259]/20 px-3 py-1 rounded-full font-bold">0</span>
+                <a href="#" class="group flex items-center justify-between px-6 py-4 bg-green-50 rounded-xl hover:bg-green-100 transition-colors duration-200">
+                  <span class="text-gray-800 font-medium">📰 Berita</span>
+                  <span class="text-green-600 font-semibold bg-green-100 px-3 py-1 rounded-full text-sm">0</span>
                 </a>
-                <a class="group flex items-center justify-between px-6 py-4 bg-gradient-to-r from-purple-500/10 to-purple-500/5 text-purple-600 rounded-full font-semibold shadow-sm hover:shadow-lg hover:from-purple-500/20 hover:to-purple-500/10 transition-all duration-300">
-                  <div class="flex items-center gap-3">
-                    <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
-                    <span>📢 Pengumuman</span>
-                  </div>
-                  <span class="text-xs bg-purple-500/20 px-3 py-1 rounded-full font-bold">0</span>
+                <a href="#" class="group flex items-center justify-between px-6 py-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-colors duration-200">
+                  <span class="text-gray-800 font-medium">📢 Pengumuman</span>
+                  <span class="text-purple-600 font-semibold bg-purple-100 px-3 py-1 rounded-full text-sm">0</span>
                 </a>
-                <a class="group flex items-center justify-between px-6 py-4 bg-gradient-to-r from-orange-500/10 to-orange-500/5 text-orange-600 rounded-full font-semibold shadow-sm hover:shadow-lg hover:from-orange-500/20 hover:to-orange-500/10 transition-all duration-300">
-                  <div class="flex items-center gap-3">
-                    <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
-                    <span>📅 Agenda</span>
-                  </div>
-                  <span class="text-xs bg-orange-500/20 px-3 py-1 rounded-full font-bold">0</span>
+                <a href="#" class="group flex items-center justify-between px-6 py-4 bg-orange-50 rounded-xl hover:bg-orange-100 transition-colors duration-200">
+                  <span class="text-gray-800 font-medium">📅 Agenda</span>
+                  <span class="text-orange-600 font-semibold bg-orange-100 px-3 py-1 rounded-full text-sm">0</span>
                 </a>
               </div>
             </div>
