@@ -389,7 +389,7 @@
                             <thead class="bg-gray-50">
                                 <tr>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Judul</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kategori</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Author</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
@@ -399,7 +399,7 @@
                                 <!-- Data berita akan dimuat dari API -->
                                 <tr>
                                     <td colspan="5" class="px-6 py-8 text-center text-gray-500">
-                                        Belum ada berita tersedia
+                                        Belum ada berita. Klik "Tambah Berita" untuk membuat berita baru.
                                     </td>
                                 </tr>
                             </tbody>
@@ -612,23 +612,23 @@
 
                     <form id="create-berita-form" onsubmit="return handleCreateBerita(event)" class="space-y-6">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Judul Berita</label>
-                            <input type="text" name="title" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                            <label for="judul-berita" class="block text-sm font-medium text-gray-700 mb-2">Judul Berita</label>
+                            <input type="text" id="judul-berita" name="judul_berita" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
                         </div>
 
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Kategori</label>
-                            <select name="category" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
-                                <option value="">Pilih Kategori</option>
-                                <option value="Berita">Berita</option>
-                                <option value="Pengumuman">Pengumuman</option>
-                                <option value="Agenda">Agenda</option>
-                            </select>
+                            <label for="isi-berita" class="block text-sm font-medium text-gray-700 mb-2">Isi Berita</label>
+                            <textarea id="isi-berita" name="isi_berita" rows="6" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required></textarea>
                         </div>
 
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Konten</label>
-                            <textarea name="content" rows="6" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required></textarea>
+                            <label for="gambar-berita" class="block text-sm font-medium text-gray-700 mb-2">Upload Gambar</label>
+                            <input type="file" id="gambar-berita" name="gambar_berita" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" accept="image/*">
+                        </div>
+
+                        <div>
+                            <label for="tanggal-berita" class="block text-sm font-medium text-gray-700 mb-2">Tanggal</label>
+                            <input type="date" id="tanggal-berita" name="tanggal_berita" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
                         </div>
 
                         <div class="flex justify-end space-x-4">
