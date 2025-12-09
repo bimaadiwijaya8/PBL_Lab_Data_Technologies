@@ -647,75 +647,7 @@
 
     <script src="../assets/js/app.js"></script>
     <script>
-        // Initialize admin dashboard
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeAdminDashboard();
-        });
-
-        function initializeAdminDashboard() {
-            // Initialize sidebar navigation
-            const sidebarLinks = document.querySelectorAll('.sidebar-link');
-            const contentSections = document.querySelectorAll('.content-section');
-            const pageTitle = document.getElementById('page-title');
-            
-            // Mobile menu toggle
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const sidebar = document.getElementById('sidebar');
-            
-            if (mobileMenuBtn && sidebar) {
-                mobileMenuBtn.addEventListener('click', () => {
-                    sidebar.classList.toggle('-translate-x-full');
-                });
-            }
-            
-            // Sidebar navigation
-            sidebarLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    
-                    // Remove active class from all links
-                    sidebarLinks.forEach(l => l.classList.remove('active', 'bg-blue-50', 'text-primary', 'border-r-2', 'border-primary'));
-                    
-                    // Add active class to clicked link
-                    link.classList.add('active', 'bg-blue-50', 'text-primary', 'border-r-2', 'border-primary');
-                    
-                    // Hide all content sections
-                    contentSections.forEach(section => section.classList.add('hidden'));
-                    
-                    // Show corresponding content section
-                    const href = link.getAttribute('href');
-                    const sectionId = href.substring(1) + '-section';
-                    const section = document.getElementById(sectionId);
-                    
-                    if (section) {
-                        section.classList.remove('hidden');
-                        
-                        // Update page title
-                        const titles = {
-                            'dashboard': 'Dashboard',
-                            'verifikasi-member': 'Verifikasi Member',
-                            'persetujuan': 'Persetujuan Perubahan',
-                            'kelola-berita': 'Kelola Berita',
-                            'kelola-publikasi': 'Kelola Publikasi',
-                            'kelola-agenda': 'Kelola Agenda',
-                            'kelola-galeri': 'Kelola Galeri',
-                            'kelola-anggota': 'Kelola Anggota',
-                            'kelola-fasilitas': 'Kelola Fasilitas',
-                            'kelola-pengumuman': 'Kelola Pengumuman'
-                        };
-                        
-                        const sectionName = href.substring(1);
-                        pageTitle.textContent = titles[sectionName] || 'Dashboard';
-                    }
-                    
-                    // Close mobile menu
-                    if (sidebar) {
-                        sidebar.classList.add('-translate-x-full');
-                    }
-                });
-            });
-        }
-
+        
         // Modal functions
         function showCreateBeritaModal() {
             document.getElementById('create-berita-modal').classList.remove('hidden');
