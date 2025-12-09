@@ -171,7 +171,7 @@ async function loadRecentActivities() {
         
         if (result.success && result.data.length > 0) {
             const activities = result.data.slice(0, 5).map(berita => {
-                const date = new Date(berita.created_at || berita.tanggal);
+                const date = new Date(berita.tanggal || berita.created_at);
                 const formattedDate = date.toLocaleDateString('id-ID', { 
                     year: 'numeric', 
                     month: 'short', 
@@ -309,8 +309,7 @@ async function loadBeritaTable() {
             }
             
             const rows = result.data.map(berita => {
-                const date = new Date(berita.created_at || berita.tanggal);
-                const formattedDate = date.toLocaleDateString('id-ID');
+                const formattedDate = formatDate(berita.tanggal || berita.created_at);
                 const statusBadge = getStatusBadge(berita.status || berita.aksi);
                 
                 return `
