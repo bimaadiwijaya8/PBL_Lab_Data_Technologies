@@ -6,6 +6,11 @@ document.addEventListener('DOMContentLoaded', function() {
     loadDashboardStats();
     loadBeritaTable();
     loadRecentActivities();
+    
+    // Additional initialization for berita functionality
+    if (typeof loadBeritaData === 'function') {
+        loadBeritaData();
+    }
 });
 
 // Initialize admin dashboard navigation and UI
@@ -126,12 +131,24 @@ async function loadDashboardStats() {
             updateStatCard('total-publications', totalCount);
         }
         
-        // Load member stats (placeholder - would need separate API)
-        updateStatCard('pending-members', 0);
-        updateStatCard('total-members', 0);
+        // Load dashboard stats from API
+        const statsResponse = await fetch('../api/dashboard_stats.php');
+        const statsResult = await statsResponse.json();
+        
+        if (statsResult.success) {
+            updateStatCard('total-members', statsResult.stats.total_members || 0);
+            updateStatCard('pending-members', statsResult.stats.pending_members || 0);
+        } else {
+            // Fallback values
+            updateStatCard('pending-members', 0);
+            updateStatCard('total-members', 0);
+        }
         
     } catch (error) {
         console.error('Error loading dashboard stats:', error);
+        // Fallback values
+        updateStatCard('pending-members', 0);
+        updateStatCard('total-members', 0);
     }
 }
 
@@ -188,6 +205,92 @@ async function loadRecentActivities() {
     }
 }
 
+// Load berita data for admin view
+function loadBeritaData() {
+    fetch('../api/get_berita.php?admin=true')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                displayBeritaTable(data.data);
+            } else {
+                console.error('Error loading berita:', data.message);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+// Display berita in table format
+function displayBeritaTable(beritaList) {
+    const tableBody = document.getElementById('berita-table');
+    
+    if (beritaList.length === 0) {
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="5" class="px-6 py-8 text-center text-gray-500">
+                    Belum ada berita. Klik "Tambah Berita" untuk membuat berita baru.
+                </td>
+            </tr>
+        `;
+        return;
+    }
+    
+    tableBody.innerHTML = beritaList.map(berita => `
+        <tr>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm font-medium text-gray-900">${berita.judul}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-500">${berita.author || 'Admin'}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-500">${formatDate(berita.tanggal || berita.created_at)}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                ${getStatusBadge(berita.aksi || berita.status)}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                ${getActionButtons(berita)}
+            </td>
+        </tr>
+    `).join('');
+}
+
+// Get action buttons for berita
+function getActionButtons(berita) {
+    if (berita.aksi === 'pending' || berita.status === 'pending') {
+        return `
+            <button onclick="approveBerita(${berita.id_berita}, 'approved')" class="text-green-600 hover:text-green-900 mr-3" title="Setujui">
+                <i class="fas fa-check"></i>
+            </button>
+            <button onclick="approveBerita(${berita.id_berita}, 'rejected')" class="text-red-600 hover:text-red-900" title="Tolak">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+    } else {
+        return `
+            <button onclick="viewBerita(${berita.id_berita})" class="text-indigo-600 hover:text-indigo-900 mr-3" title="Lihat">
+                <i class="fas fa-eye"></i>
+            </button>
+            <button onclick="editBerita(${berita.id_berita})" class="text-blue-600 hover:text-blue-900 mr-3" title="Edit">
+                <i class="fas fa-edit"></i>
+            </button>
+            <button onclick="deleteBerita(${berita.id_berita})" class="text-red-600 hover:text-red-900" title="Hapus">
+                <i class="fas fa-trash"></i>
+            </button>
+        `;
+    }
+}
+
+// Format date helper
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('id-ID', {
+        day: 'numeric', 
+        month: 'long', 
+        year: 'numeric'
+    });
+}
+
 // Load berita table for admin
 async function loadBeritaTable() {
     const tableBody = document.getElementById('berita-table');
@@ -233,7 +336,11 @@ async function loadBeritaTable() {
                                     <button onclick="rejectBerita(${berita.id_berita})" class="text-red-600 hover:text-red-900" title="Tolak">
                                         <i class="fas fa-times"></i>
                                     </button>
-                                ` : ''}
+                                ` : `
+                                    <button onclick="viewBerita(${berita.id_berita})" class="text-indigo-600 hover:text-indigo-900" title="Lihat">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                `}
                                 <button onclick="editBerita(${berita.id_berita})" class="text-blue-600 hover:text-blue-900" title="Edit">
                                     <i class="fas fa-edit"></i>
                                 </button>
@@ -320,8 +427,9 @@ async function loadPengumumanTable() {
 }
 
 // Berita action functions
-async function approveBerita(id) {
-    if (!confirm('Apakah Anda yakin ingin menyetujui berita ini?')) return;
+async function approveBerita(id, action = 'approved') {
+    const actionText = action === 'approved' ? 'menyetujui' : 'menolak';
+    if (!confirm(`Apakah Anda yakin ingin ${actionText} berita ini?`)) return;
     
     try {
         const response = await fetch('../api/approve_berita.php', {
@@ -329,49 +437,26 @@ async function approveBerita(id) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ id_berita: id, aksi: 'approved' })
+            body: JSON.stringify({ id_berita: id, aksi: action })
         });
         
         const result = await response.json();
         
         if (result.success) {
-            showToast(result.message || 'Berita berhasil disetujui');
+            showToast(result.message || `Berita berhasil ${actionText}`);
             loadBeritaTable(); // Refresh table
             loadDashboardStats(); // Refresh stats
         } else {
-            showToast(result.message || 'Gagal menyetujui berita');
+            showToast(result.message || `Gagal ${actionText} berita`);
         }
     } catch (error) {
         console.error('Error approving berita:', error);
-        showToast('Terjadi kesalahan saat menyetujui berita');
+        showToast(`Terjadi kesalahan saat ${actionText} berita`);
     }
 }
 
 async function rejectBerita(id) {
-    if (!confirm('Apakah Anda yakin ingin menolak berita ini?')) return;
-    
-    try {
-        const response = await fetch('../api/approve_berita.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ id_berita: id, aksi: 'rejected' })
-        });
-        
-        const result = await response.json();
-        
-        if (result.success) {
-            showToast(result.message || 'Berita ditolak');
-            loadBeritaTable(); // Refresh table
-            loadDashboardStats(); // Refresh stats
-        } else {
-            showToast(result.message || 'Gagal menolak berita');
-        }
-    } catch (error) {
-        console.error('Error rejecting berita:', error);
-        showToast('Terjadi kesalahan saat menolak berita');
-    }
+    return approveBerita(id, 'rejected');
 }
 
 function editBerita(id) {
@@ -383,15 +468,98 @@ function editBerita(id) {
 function deleteBerita(id) {
     if (!confirm('Apakah Anda yakin ingin menghapus berita ini?')) return;
     
-    // Placeholder for delete functionality
-    console.log('Delete berita:', id);
-    showToast('Fitur hapus akan segera tersedia');
+    try {
+        fetch('../api/delete_berita.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id_berita: id })
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                showToast(result.message || 'Berita berhasil dihapus');
+                loadBeritaTable(); // Refresh table
+                loadDashboardStats(); // Refresh stats
+            } else {
+                showToast(result.message || 'Gagal menghapus berita');
+            }
+        })
+        .catch(error => {
+            console.error('Error deleting berita:', error);
+            showToast('Terjadi kesalahan saat menghapus berita');
+        });
+    } catch (error) {
+        console.error('Error:', error);
+        showToast('Terjadi kesalahan saat menghapus berita');
+    }
 }
 
-// Modal functions (placeholders)
-function showCreateBeritaModal() {
-    console.log('Show create berita modal');
-    showToast('Fitur tambah berita akan segera tersedia');
+function viewBerita(id) {
+    // Implement view modal or redirect to detail page
+    console.log('View berita:', id);
+    showToast('Fitur lihat berita akan segera tersedia');
+}
+
+// Modal functions
+function openAddNewsModal() {
+    document.getElementById('add-news-modal').classList.remove('hidden');
+    document.body.classList.add('overflow-hidden');
+}
+
+function closeAddNewsModal() {
+    document.getElementById('add-news-modal').classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
+    document.getElementById('add-news-form').reset();
+}
+
+function createNews(event) {
+    event.preventDefault();
+    
+    const form = document.getElementById('add-news-form');
+    const formData = new FormData(form);
+    
+    // Show loading state
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Menyimpan...';
+    
+    // Submit to API
+    fetch('../api/submit_berita.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Show success message
+            showToast(data.message || 'Berita berhasil ditambahkan');
+            
+            // Close modal and reset form
+            closeAddNewsModal();
+            
+            // Refresh news table
+            loadBeritaTable();
+            
+            // Update dashboard stats
+            loadDashboardStats();
+        } else {
+            showToast(data.message || 'Gagal menambahkan berita');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showToast('Terjadi kesalahan saat menyimpan berita');
+    })
+    .finally(() => {
+        // Restore button state
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+    });
+    
+    return false;
 }
 
 function showCreatePublikasiModal() {
