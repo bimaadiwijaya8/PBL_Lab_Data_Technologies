@@ -625,6 +625,277 @@
         function openAddPublicationModal() {
             console.log('Open add publication modal');
         }
+
+        function createNews(event) {
+            event.preventDefault();
+            
+            const form = document.getElementById('add-news-form');
+            const formData = new FormData(form);
+            
+            // Show loading state
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Menyimpan...';
+            
+            // Submit to API
+            fetch('../api/submit_berita.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Show success message
+                    showNotification('success', data.message);
+                    
+                    // Close modal and reset form
+                    closeAddNewsModal();
+                    
+                    // Refresh news table (if function exists)
+                    if (typeof loadBeritaData === 'function') {
+                        loadBeritaData();
+                    }
+                    
+                    // Update dashboard stats
+                    if (typeof updateDashboardStats === 'function') {
+                        updateDashboardStats();
+                    }
+                } else {
+                    showNotification('error', data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showNotification('error', 'Terjadi kesalahan saat menyimpan berita');
+            })
+            .finally(() => {
+                // Restore button state
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            });
+            
+            return false;
+        }
+
+        function showNotification(type, message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 transform transition-all duration-300 translate-x-full`;
+            
+            if (type === 'success') {
+                notification.classList.add('bg-green-500', 'text-white');
+                notification.innerHTML = `
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle mr-2"></i>
+                        <span>${message}</span>
+                    </div>
+                `;
+            } else {
+                notification.classList.add('bg-red-500', 'text-white');
+                notification.innerHTML = `
+                    <div class="flex items-center">
+                        <i class="fas fa-exclamation-circle mr-2"></i>
+                        <span>${message}</span>
+                    </div>
+                `;
+            }
+            
+            document.body.appendChild(notification);
+            
+            // Slide in
+            setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+            }, 100);
+            
+            // Auto remove after 3 seconds
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Load berita data for admin view
+        function loadBeritaData() {
+            fetch('../api/get_berita.php?admin=true')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        displayBeritaTable(data.data);
+                    } else {
+                        console.error('Error loading berita:', data.message);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        // Display berita in table format
+        function displayBeritaTable(beritaList) {
+            const tableBody = document.getElementById('berita-table');
+            
+            if (beritaList.length === 0) {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="px-6 py-8 text-center text-gray-500">
+                            Belum ada berita. Klik "Tambah Berita" untuk membuat berita baru.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            tableBody.innerHTML = beritaList.map(berita => `
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm font-medium text-gray-900">${berita.judul}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-500">${berita.author}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-500">${formatDate(berita.tanggal)}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        ${getStatusBadge(berita.aksi)}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        ${getActionButtons(berita)}
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Get status badge HTML
+        function getStatusBadge(status) {
+            const badges = {
+                'pending': '<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pending</span>',
+                'approved': '<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Disetujui</span>',
+                'rejected': '<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Ditolak</span>'
+            };
+            return badges[status] || badges['pending'];
+        }
+
+        // Get action buttons for berita
+        function getActionButtons(berita) {
+            if (berita.aksi === 'pending') {
+                return `
+                    <button onclick="approveBerita(${berita.id_berita}, 'approved')" class="text-green-600 hover:text-green-900 mr-3" title="Setujui">
+                        <i class="fas fa-check"></i>
+                    </button>
+                    <button onclick="approveBerita(${berita.id_berita}, 'rejected')" class="text-red-600 hover:text-red-900" title="Tolak">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+            } else {
+                return `
+                    <button onclick="viewBerita(${berita.id_berita})" class="text-indigo-600 hover:text-indigo-900" title="Lihat">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                `;
+            }
+        }
+
+        // Approve/reject berita
+        function approveBerita(id, action) {
+            if (!confirm(`Apakah Anda yakin ingin ${action === 'approved' ? 'menyetujui' : 'menolak'} berita ini?`)) {
+                return;
+            }
+            
+            fetch('../api/approve_berita.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id_berita: id,
+                    aksi: action
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showNotification('success', data.message);
+                    loadBeritaData(); // Refresh table
+                    updateDashboardStats(); // Update stats
+                } else {
+                    showNotification('error', data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showNotification('error', 'Terjadi kesalahan saat memperbarui status');
+            });
+        }
+
+        // View berita details
+        function viewBerita(id) {
+            // Implement view modal or redirect to detail page
+            console.log('View berita:', id);
+        }
+
+        // Update dashboard statistics
+        function updateDashboardStats() {
+            fetch('../api/dashboard_stats.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('total-berita').textContent = data.stats.total_berita;
+                        document.getElementById('total-agenda').textContent = data.stats.total_agenda;
+                        document.getElementById('pending-content').textContent = data.stats.pending_content;
+                        document.getElementById('approved-content').textContent = data.stats.approved_content;
+                        
+                        // Update recent activities
+                        updateRecentActivities(data.recent_pending);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        // Update recent activities
+        function updateRecentActivities(activities) {
+            const container = document.getElementById('recent-activities');
+            
+            if (activities.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 text-center py-8">Belum ada aktivitas terbaru</p>';
+                return;
+            }
+            
+            container.innerHTML = activities.map(activity => `
+                <div class="flex items-center justify-between py-3 border-b border-gray-100 last:border-0">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-newspaper text-yellow-600 text-xs"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-900">Berita "${activity.judul}" menunggu approval</p>
+                            <p class="text-xs text-gray-500">Oleh Admin - ${formatDate(activity.created_at)}</p>
+                        </div>
+                    </div>
+                    <button onclick="approveBerita(${activity.id_berita}, 'approved')" class="text-green-600 hover:text-green-800 text-sm">
+                        <i class="fas fa-check mr-1"></i>Setujui
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // Format date helper
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('id-ID', {
+                day: 'numeric', 
+                month: 'long', 
+                year: 'numeric'
+            });
+        }
+
+        // Initialize dashboard when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load initial data
+            updateDashboardStats();
+            loadBeritaData();
+        });
     </script>
 
     <!-- Logo Edit Modal -->

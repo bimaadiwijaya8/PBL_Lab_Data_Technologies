@@ -180,12 +180,40 @@ function handleCreateBerita(event) {
   const form = event.target;
   const formData = new FormData(form);
   
-  // Placeholder for API call
-  console.log('Create berita:', Object.fromEntries(formData));
+  // Show loading state
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalBtnText = submitBtn.innerHTML;
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Menyimpan...';
   
-  showToast('Berita berhasil dibuat, menunggu persetujuan admin');
-  form.reset();
-  closeModal('#modal-berita');
+  // Send data to API
+  fetch('../api/submit_berita.php', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      showToast(data.message || 'Berita berhasil dibuat dan menunggu persetujuan admin');
+      form.reset();
+      closeCreateBeritaModal();
+      // Refresh the berita list if it exists
+      if (typeof loadNewsAndAgenda === 'function') {
+        loadNewsAndAgenda();
+      }
+    } else {
+      showToast(data.message || 'Gagal membuat berita');
+    }
+  })
+  .catch(error => {
+    console.error('Error creating berita:', error);
+    showToast('Terjadi kesalahan saat membuat berita');
+  })
+  .finally(() => {
+    // Restore button state
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalBtnText;
+  });
 }
 
 function handleUpdateBerita(event) {

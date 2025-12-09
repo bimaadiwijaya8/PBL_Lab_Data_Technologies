@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Submit Berita API</title>
+</head>
+<body>
+    <h1>Test Submit Berita API</h1>
+    <form id="testForm">
+        <div>
+            <label>Judul Berita:</label>
+            <input type="text" name="judul_berita" value="Test Berita" required>
+        </div>
+        <div>
+            <label>Isi Berita:</label>
+            <textarea name="isi_berita" required>Ini adalah test berita</textarea>
+        </div>
+        <div>
+            <label>Tanggal:</label>
+            <input type="date" name="tanggal_berita" value="2025-01-12" required>
+        </div>
+        <div>
+            <label>Gambar:</label>
+            <input type="file" name="gambar_berita" accept="image/*">
+        </div>
+        <button type="submit">Submit Test</button>
+    </form>
+    
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('testForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const resultDiv = document.getElementById('result');
+            
+            resultDiv.innerHTML = 'Submitting...';
+            
+            fetch('api/submit_berita.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                resultDiv.innerHTML = '<h3>Result:</h3><pre>' + JSON.stringify(data, null, 2) + '</pre>';
+            })
+            .catch(error => {
+                resultDiv.innerHTML = '<h3>Error:</h3><pre>' + error + '</pre>';
+            });
+        });
+    </script>
+</body>
+</html>
