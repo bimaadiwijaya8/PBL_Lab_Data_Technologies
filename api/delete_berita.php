@@ -51,8 +51,8 @@ try {
     
     $conn = Database::getConnection();
     
-    // First check if the berita exists
-    $check_query = "SELECT id_berita, judul FROM berita WHERE id_berita = :id_berita";
+    // First check if the berita exists and get image path
+    $check_query = "SELECT id_berita, judul, gambar FROM berita WHERE id_berita = :id_berita";
     $check_stmt = $conn->prepare($check_query);
     $check_stmt->bindParam(':id_berita', $id_berita, PDO::PARAM_INT);
     $check_stmt->execute();
@@ -67,6 +67,7 @@ try {
     
     $berita_data = $check_stmt->fetch(PDO::FETCH_ASSOC);
     $judul_berita = $berita_data['judul'];
+    $oldImagePath = $berita_data['gambar'] ?? null;
     
     // Delete the berita
     $delete_query = "DELETE FROM berita WHERE id_berita = :id_berita";
@@ -74,6 +75,15 @@ try {
     $delete_stmt->bindParam(':id_berita', $id_berita, PDO::PARAM_INT);
     
     if ($delete_stmt->execute()) {
+        // Delete associated image if it exists
+        if ($oldImagePath) {
+            $oldFileFullPath = '../' . $oldImagePath;
+            if (file_exists($oldFileFullPath)) {
+                unlink($oldFileFullPath);
+                error_log("Deleted image with berita: " . $oldImagePath);
+            }
+        }
+        
         // Log the deletion (optional, for audit purposes)
         error_log("Berita deleted: ID $id_berita, Judul: $judul_berita");
         
