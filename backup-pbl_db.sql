@@ -2,12 +2,12 @@
 -- PostgreSQL database dump
 --
 
-\restrict vlkalvZE4pjqNxVlVk3yOG8BMqwzNvZVscPJ2syp78cr3ql2rhQgXoHVNVPm0aU
+\restrict DzvSkVzc9OBtk4dKefqr3oy07PRdOzffit9VYuKml3oHCJPGDZbrtTOeLVoyIYk
 
 -- Dumped from database version 15.14
 -- Dumped by pg_dump version 15.14
 
--- Started on 2025-12-10 20:49:48
+-- Started on 2025-12-11 02:03:27
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -916,17 +916,9 @@ COPY public.berita (id_berita, judul, gambar, informasi, tanggal, author, create
 1	Workshop Dasar-Dasar ROS	gambar_workshop.jpg	Telah diselenggarakan Workshop Dasar-Dasar Robot Operating System (ROS) pada 15-16 November 2025.	2025-11-17	1	2025-12-09 07:49:26.986257	approved	approved
 2	Lab Meraih Hibah Penelitian Baru	gambar_hibah.jpg	Peneliti Lab mendapatkan hibah riset untuk 3 tahun ke depan dengan fokus IoT dan Data Science.	2025-10-25	2	2025-12-09 07:49:26.986257	approved	approved
 3	Kunjungan Industri ke PT. Robotik Jaya	gambar_kunjungan.jpg	Mahasiswa dan Anggota Lab melakukan kunjungan ke PT. Robotik Jaya untuk melihat langsung proses produksi.	2025-11-01	3	2025-12-09 07:49:26.986257	approved	approved
-4	judul	gambar_workshop.jpg	xxy	2025-11-15	1	2025-12-09 07:49:26.986257	approved	approved
-5	judul1	fier	gambar.jpg	2025-11-22	2	2025-12-09 07:49:26.986257	approved	approved
-11	tst	assets/img/berita/berita_1765285599_69381edfb0b34.png	tst	2025-11-19	1	2025-12-09 20:06:39.776715	rejected	rejected
-10	test5	assets/img/berita/berita_1765252756_69379e94a137e.png	info test5	2025-12-14	1	2025-12-09 10:59:16.699622	approved	approved
-9	et4	assets/img/berita/berita_1765244177_69377d11682dc.png	4646	2025-11-13	1	2025-12-09 08:36:17.452733	approved	approved
-13	13	assets/img/berita/berita_1765336940_6938e76c369e6.png	13	2025-12-16	1	2025-12-10 10:22:20.267678	approved	approved
-15	15	\N	15	2025-11-04	1	2025-12-10 17:46:58.683089	pending	pending
-16	test	\N	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.	2025-11-16	1	2025-12-10 17:50:14.826091	pending	pending
 18	Lorem ipsum dolor sit amet, consectetur elit, do   et . Ut ad , quis ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate	\N	2	2025-12-04	1	2025-12-10 17:52:22.778587	approved	approved
-17	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 	\N	test	2025-11-14	1	2025-12-10 17:51:16.22263	rejected	rejected
-19	TRY	\N	try	2025-12-05	1	2025-12-10 20:39:48.028817	pending	pending
+20	TRY55	assets/img/berita/berita_1765393042_a9ea6b6622178c7e.jpeg	555	2025-05-05	2	2025-12-11 01:20:04.545333	approved	approved
+5	berita elon musk	fier	coba tes dulu ya	2025-11-03	1	2025-12-09 07:49:26.986257	approved	approved
 \.
 
 
@@ -1070,7 +1062,7 @@ SELECT pg_catalog.setval('public.anggota_id_anggota_seq', 3, true);
 -- Name: berita_id_berita_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.berita_id_berita_seq', 19, true);
+SELECT pg_catalog.setval('public.berita_id_berita_seq', 21, true);
 
 
 --
@@ -1451,11 +1443,11 @@ ALTER TABLE ONLY public.publikasi
     ADD CONSTRAINT publikasi_id_anggota_fkey FOREIGN KEY (id_anggota) REFERENCES public.anggota(id_anggota) ON DELETE SET NULL;
 
 
--- Completed on 2025-12-10 20:49:48
+-- Completed on 2025-12-11 02:03:27
 
 --
 -- PostgreSQL database dump complete
 --
 
-\unrestrict vlkalvZE4pjqNxVlVk3yOG8BMqwzNvZVscPJ2syp78cr3ql2rhQgXoHVNVPm0aU
+\unrestrict DzvSkVzc9OBtk4dKefqr3oy07PRdOzffit9VYuKml3oHCJPGDZbrtTOeLVoyIYk
 

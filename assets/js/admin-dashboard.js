@@ -450,10 +450,109 @@ async function rejectBerita(id) {
     return approveBerita(id, 'rejected');
 }
 
-function editBerita(id) {
-    // Placeholder for edit functionality
-    console.log('Edit berita:', id);
-    showToast('Fitur edit akan segera tersedia');
+async function editBerita(id) {
+    try {
+        // Show loading state
+        showToast('Memuat data berita...', 1000);
+        
+        // Fetch berita data
+        const response = await fetch(`../api/edit_berita.php?id_berita=${id}`);
+        const result = await response.json();
+        
+        if (result.success) {
+            // Populate form with berita data
+            const berita = result.data;
+            document.getElementById('edit-id-berita').value = berita.id_berita;
+            document.getElementById('edit-judul-berita').value = berita.judul;
+            document.getElementById('edit-isi-berita').value = berita.informasi;
+            document.getElementById('edit-tanggal-berita').value = berita.tanggal;
+            document.getElementById('edit-author-berita').value = berita.author || 'Admin';
+            
+            // Show current image if exists
+            if (berita.gambar) {
+                const previewDiv = document.getElementById('edit-gambar-preview');
+                const previewImg = document.getElementById('edit-gambar-preview-img');
+                previewImg.src = berita.gambar.startsWith('http') ? berita.gambar : '../' + berita.gambar;
+                previewDiv.classList.remove('hidden');
+            } else {
+                document.getElementById('edit-gambar-preview').classList.add('hidden');
+            }
+            
+            // Show modal
+            openEditBeritaModal();
+        } else {
+            showToast(result.message || 'Gagal memuat data berita');
+        }
+    } catch (error) {
+        console.error('Error loading berita for edit:', error);
+        showToast('Terjadi kesalahan saat memuat data berita');
+    }
+}
+
+function openEditBeritaModal() {
+    document.getElementById('edit-berita-modal').classList.remove('hidden');
+    document.body.classList.add('overflow-hidden');
+}
+
+function closeEditBeritaModal() {
+    document.getElementById('edit-berita-modal').classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
+    document.getElementById('edit-berita-form').reset();
+    document.getElementById('edit-gambar-preview').classList.add('hidden');
+}
+
+function previewEditImage(input) {
+    const previewDiv = document.getElementById('edit-gambar-preview');
+    const previewImg = document.getElementById('edit-gambar-preview-img');
+    
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            previewImg.src = e.target.result;
+            previewDiv.classList.remove('hidden');
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+async function handleEditBerita(event) {
+    event.preventDefault();
+    
+    const form = document.getElementById('edit-berita-form');
+    const formData = new FormData(form);
+    
+    // Show loading state
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Memperbarui...';
+    
+    try {
+        const response = await fetch('../api/edit_berita.php', {
+            method: 'POST',
+            body: formData // Send as FormData to support file upload
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            showToast(result.message || 'Berita berhasil diperbarui');
+            closeEditBeritaModal();
+            loadBeritaTable(); // Refresh table
+            loadDashboardStats(); // Refresh stats
+        } else {
+            showToast(result.message || 'Gagal memperbarui berita');
+        }
+    } catch (error) {
+        console.error('Error updating berita:', error);
+        showToast('Terjadi kesalahan saat memperbarui berita');
+    } finally {
+        // Restore button state
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+    }
+    
+    return false;
 }
 
 function deleteBerita(id) {

@@ -530,6 +530,64 @@
         </div>
     </div>
 
+    <!-- Edit Berita Modal -->
+    <div id="edit-berita-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-screen overflow-y-auto">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-semibold text-gray-800">Edit Berita</h3>
+                        <button onclick="closeEditBeritaModal()" class="text-gray-400 hover:text-gray-600">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+
+                    <form id="edit-berita-form" onsubmit="return handleEditBerita(event)" class="space-y-6">
+                        <input type="hidden" id="edit-id-berita" name="id_berita">
+                        
+                        <div>
+                            <label for="edit-judul-berita" class="block text-sm font-medium text-gray-700 mb-2">Judul Berita</label>
+                            <input type="text" id="edit-judul-berita" name="judul" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                        </div>
+
+                        <div>
+                            <label for="edit-isi-berita" class="block text-sm font-medium text-gray-700 mb-2">Isi Berita</label>
+                            <textarea id="edit-isi-berita" name="informasi" rows="6" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required></textarea>
+                        </div>
+
+                        <div>
+                            <label for="edit-gambar-berita" class="block text-sm font-medium text-gray-700 mb-2">Upload Gambar (Opsional)</label>
+                            <input type="file" id="edit-gambar-berita" name="gambar_berita" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" accept="image/*" onchange="previewEditImage(this)">
+                            <div id="edit-gambar-preview" class="mt-2 hidden">
+                                <img id="edit-gambar-preview-img" src="" alt="Preview" class="max-w-full h-32 object-cover rounded">
+                                <p class="text-sm text-gray-500 mt-1">Gambar saat ini. Upload gambar baru untuk mengganti.</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="edit-tanggal-berita" class="block text-sm font-medium text-gray-700 mb-2">Tanggal</label>
+                            <input type="date" id="edit-tanggal-berita" name="tanggal" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                        </div>
+
+                        <div>
+                            <label for="edit-author-berita" class="block text-sm font-medium text-gray-700 mb-2">Author</label>
+                            <input type="text" id="edit-author-berita" name="author" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                        </div>
+
+                        <div class="flex justify-end space-x-4">
+                            <button type="button" onclick="closeEditBeritaModal()" class="px-6 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors duration-200">
+                                Batal
+                            </button>
+                            <button type="submit" class="px-6 py-2 bg-primary text-white rounded-md hover:bg-blue-600 transition-colors duration-200">
+                                Update Berita
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="../assets/js/app.js"></script>
     <script src="../assets/js/editor-dashboard.js"></script>
 
