@@ -2,12 +2,12 @@
 -- PostgreSQL database dump
 --
 
-\restrict DzvSkVzc9OBtk4dKefqr3oy07PRdOzffit9VYuKml3oHCJPGDZbrtTOeLVoyIYk
+\restrict nbWXK4sWeIQBrrhr7FbwGQfSjcySytNL78zXSBgpN3lXfquQ1NqWiIUWTE8NoZs
 
 -- Dumped from database version 15.14
 -- Dumped by pg_dump version 15.14
 
--- Started on 2025-12-11 02:03:27
+-- Started on 2025-12-11 03:21:32
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -21,7 +21,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 243 (class 1255 OID 51290)
+-- TOC entry 243 (class 1255 OID 18268)
 -- Name: add_fasilitas(character varying, text, text, integer); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -52,7 +52,7 @@ $$;
 ALTER FUNCTION public.add_fasilitas(p_nama character varying, p_deskripsi text, p_foto text, p_user_id integer) OWNER TO postgres;
 
 --
--- TOC entry 244 (class 1255 OID 51291)
+-- TOC entry 244 (class 1255 OID 18269)
 -- Name: update_galeri(integer, character varying, text, text, integer); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -75,7 +75,7 @@ $$;
 ALTER FUNCTION public.update_galeri(p_id_foto integer, p_nama character varying, p_deskripsi text, p_file text, p_user_id integer) OWNER TO postgres;
 
 --
--- TOC entry 245 (class 1255 OID 51292)
+-- TOC entry 245 (class 1255 OID 18270)
 -- Name: update_setting(character varying, text, integer); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -95,7 +95,7 @@ $$;
 ALTER FUNCTION public.update_setting(p_key character varying, p_value text, p_user_id integer) OWNER TO postgres;
 
 --
--- TOC entry 246 (class 1255 OID 51293)
+-- TOC entry 246 (class 1255 OID 18271)
 -- Name: update_timestamp(); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -112,7 +112,7 @@ $$;
 ALTER FUNCTION public.update_timestamp() OWNER TO postgres;
 
 --
--- TOC entry 247 (class 1255 OID 51294)
+-- TOC entry 247 (class 1255 OID 18272)
 -- Name: upload_publikasi(integer, character varying, character varying, date, text, text); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -151,7 +151,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- TOC entry 214 (class 1259 OID 51295)
+-- TOC entry 214 (class 1259 OID 18273)
 -- Name: agenda; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -167,7 +167,7 @@ CREATE TABLE public.agenda (
 ALTER TABLE public.agenda OWNER TO postgres;
 
 --
--- TOC entry 215 (class 1259 OID 51300)
+-- TOC entry 215 (class 1259 OID 18278)
 -- Name: agenda_id_agenda_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -192,7 +192,7 @@ ALTER SEQUENCE public.agenda_id_agenda_seq OWNED BY public.agenda.id_agenda;
 
 
 --
--- TOC entry 216 (class 1259 OID 51301)
+-- TOC entry 216 (class 1259 OID 18279)
 -- Name: anggota; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -210,7 +210,7 @@ CREATE TABLE public.anggota (
 ALTER TABLE public.anggota OWNER TO postgres;
 
 --
--- TOC entry 217 (class 1259 OID 51306)
+-- TOC entry 217 (class 1259 OID 18284)
 -- Name: anggota_id_anggota_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -235,7 +235,7 @@ ALTER SEQUENCE public.anggota_id_anggota_seq OWNED BY public.anggota.id_anggota;
 
 
 --
--- TOC entry 218 (class 1259 OID 51307)
+-- TOC entry 218 (class 1259 OID 18285)
 -- Name: berita; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -255,7 +255,7 @@ CREATE TABLE public.berita (
 ALTER TABLE public.berita OWNER TO postgres;
 
 --
--- TOC entry 219 (class 1259 OID 51312)
+-- TOC entry 219 (class 1259 OID 18293)
 -- Name: berita_id_berita_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -280,7 +280,7 @@ ALTER SEQUENCE public.berita_id_berita_seq OWNED BY public.berita.id_berita;
 
 
 --
--- TOC entry 220 (class 1259 OID 51313)
+-- TOC entry 220 (class 1259 OID 18294)
 -- Name: fasilitas; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -296,7 +296,7 @@ CREATE TABLE public.fasilitas (
 ALTER TABLE public.fasilitas OWNER TO postgres;
 
 --
--- TOC entry 221 (class 1259 OID 51318)
+-- TOC entry 221 (class 1259 OID 18299)
 -- Name: fasilitas_id_fasilitas_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -321,7 +321,7 @@ ALTER SEQUENCE public.fasilitas_id_fasilitas_seq OWNED BY public.fasilitas.id_fa
 
 
 --
--- TOC entry 222 (class 1259 OID 51319)
+-- TOC entry 222 (class 1259 OID 18300)
 -- Name: galeri; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -338,7 +338,7 @@ CREATE TABLE public.galeri (
 ALTER TABLE public.galeri OWNER TO postgres;
 
 --
--- TOC entry 223 (class 1259 OID 51324)
+-- TOC entry 223 (class 1259 OID 18305)
 -- Name: galeri_id_foto_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -363,7 +363,7 @@ ALTER SEQUENCE public.galeri_id_foto_seq OWNED BY public.galeri.id_foto;
 
 
 --
--- TOC entry 224 (class 1259 OID 51325)
+-- TOC entry 224 (class 1259 OID 18306)
 -- Name: jurnal; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -379,7 +379,7 @@ CREATE TABLE public.jurnal (
 ALTER TABLE public.jurnal OWNER TO postgres;
 
 --
--- TOC entry 225 (class 1259 OID 51330)
+-- TOC entry 225 (class 1259 OID 18311)
 -- Name: jurnal_id_jurnal_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -404,7 +404,7 @@ ALTER SEQUENCE public.jurnal_id_jurnal_seq OWNED BY public.jurnal.id_jurnal;
 
 
 --
--- TOC entry 226 (class 1259 OID 51331)
+-- TOC entry 226 (class 1259 OID 18312)
 -- Name: kerjasama; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -420,7 +420,7 @@ CREATE TABLE public.kerjasama (
 ALTER TABLE public.kerjasama OWNER TO postgres;
 
 --
--- TOC entry 227 (class 1259 OID 51336)
+-- TOC entry 227 (class 1259 OID 18317)
 -- Name: kerjasama_id_kerjasama_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -445,7 +445,7 @@ ALTER SEQUENCE public.kerjasama_id_kerjasama_seq OWNED BY public.kerjasama.id_ke
 
 
 --
--- TOC entry 228 (class 1259 OID 51337)
+-- TOC entry 228 (class 1259 OID 18318)
 -- Name: kontak; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -463,7 +463,7 @@ CREATE TABLE public.kontak (
 ALTER TABLE public.kontak OWNER TO postgres;
 
 --
--- TOC entry 229 (class 1259 OID 51342)
+-- TOC entry 229 (class 1259 OID 18323)
 -- Name: kontak_id_kontak_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -488,7 +488,7 @@ ALTER SEQUENCE public.kontak_id_kontak_seq OWNED BY public.kontak.id_kontak;
 
 
 --
--- TOC entry 230 (class 1259 OID 51343)
+-- TOC entry 230 (class 1259 OID 18324)
 -- Name: member; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -512,7 +512,7 @@ CREATE TABLE public.member (
 ALTER TABLE public.member OWNER TO postgres;
 
 --
--- TOC entry 231 (class 1259 OID 51349)
+-- TOC entry 231 (class 1259 OID 18330)
 -- Name: member_id_member_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -537,7 +537,7 @@ ALTER SEQUENCE public.member_id_member_seq OWNED BY public.member.id_member;
 
 
 --
--- TOC entry 232 (class 1259 OID 51350)
+-- TOC entry 232 (class 1259 OID 18331)
 -- Name: pengumuman; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -553,7 +553,7 @@ CREATE TABLE public.pengumuman (
 ALTER TABLE public.pengumuman OWNER TO postgres;
 
 --
--- TOC entry 233 (class 1259 OID 51355)
+-- TOC entry 233 (class 1259 OID 18336)
 -- Name: pengumuman_id_pengumuman_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -578,7 +578,7 @@ ALTER SEQUENCE public.pengumuman_id_pengumuman_seq OWNED BY public.pengumuman.id
 
 
 --
--- TOC entry 234 (class 1259 OID 51356)
+-- TOC entry 234 (class 1259 OID 18337)
 -- Name: publikasi; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -598,7 +598,7 @@ CREATE TABLE public.publikasi (
 ALTER TABLE public.publikasi OWNER TO postgres;
 
 --
--- TOC entry 235 (class 1259 OID 51363)
+-- TOC entry 235 (class 1259 OID 18344)
 -- Name: publikasi_id_publikasi_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -623,7 +623,7 @@ ALTER SEQUENCE public.publikasi_id_publikasi_seq OWNED BY public.publikasi.id_pu
 
 
 --
--- TOC entry 236 (class 1259 OID 51364)
+-- TOC entry 236 (class 1259 OID 18345)
 -- Name: settings; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -639,7 +639,7 @@ CREATE TABLE public.settings (
 ALTER TABLE public.settings OWNER TO postgres;
 
 --
--- TOC entry 237 (class 1259 OID 51370)
+-- TOC entry 237 (class 1259 OID 18351)
 -- Name: settings_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -664,7 +664,7 @@ ALTER SEQUENCE public.settings_id_seq OWNED BY public.settings.id;
 
 
 --
--- TOC entry 238 (class 1259 OID 51371)
+-- TOC entry 238 (class 1259 OID 18352)
 -- Name: users; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -685,7 +685,7 @@ CREATE TABLE public.users (
 ALTER TABLE public.users OWNER TO postgres;
 
 --
--- TOC entry 239 (class 1259 OID 51379)
+-- TOC entry 239 (class 1259 OID 18360)
 -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -710,7 +710,7 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
--- TOC entry 240 (class 1259 OID 51380)
+-- TOC entry 240 (class 1259 OID 18361)
 -- Name: vw_galeri_users; Type: VIEW; Schema: public; Owner: postgres
 --
 
@@ -731,7 +731,7 @@ CREATE VIEW public.vw_galeri_users AS
 ALTER TABLE public.vw_galeri_users OWNER TO postgres;
 
 --
--- TOC entry 241 (class 1259 OID 51384)
+-- TOC entry 241 (class 1259 OID 18365)
 -- Name: vw_publikasi_member; Type: VIEW; Schema: public; Owner: postgres
 --
 
@@ -757,7 +757,7 @@ CREATE VIEW public.vw_publikasi_member AS
 ALTER TABLE public.vw_publikasi_member OWNER TO postgres;
 
 --
--- TOC entry 242 (class 1259 OID 51389)
+-- TOC entry 242 (class 1259 OID 18370)
 -- Name: vw_settings_users; Type: VIEW; Schema: public; Owner: postgres
 --
 
@@ -776,7 +776,7 @@ CREATE VIEW public.vw_settings_users AS
 ALTER TABLE public.vw_settings_users OWNER TO postgres;
 
 --
--- TOC entry 3250 (class 2604 OID 51393)
+-- TOC entry 3250 (class 2604 OID 18523)
 -- Name: agenda id_agenda; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -784,7 +784,7 @@ ALTER TABLE ONLY public.agenda ALTER COLUMN id_agenda SET DEFAULT nextval('publi
 
 
 --
--- TOC entry 3251 (class 2604 OID 51394)
+-- TOC entry 3251 (class 2604 OID 18524)
 -- Name: anggota id_anggota; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -792,7 +792,7 @@ ALTER TABLE ONLY public.anggota ALTER COLUMN id_anggota SET DEFAULT nextval('pub
 
 
 --
--- TOC entry 3252 (class 2604 OID 51395)
+-- TOC entry 3252 (class 2604 OID 18525)
 -- Name: berita id_berita; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -800,7 +800,7 @@ ALTER TABLE ONLY public.berita ALTER COLUMN id_berita SET DEFAULT nextval('publi
 
 
 --
--- TOC entry 3256 (class 2604 OID 51396)
+-- TOC entry 3256 (class 2604 OID 18526)
 -- Name: fasilitas id_fasilitas; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -808,7 +808,7 @@ ALTER TABLE ONLY public.fasilitas ALTER COLUMN id_fasilitas SET DEFAULT nextval(
 
 
 --
--- TOC entry 3257 (class 2604 OID 51397)
+-- TOC entry 3257 (class 2604 OID 18527)
 -- Name: galeri id_foto; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -816,7 +816,7 @@ ALTER TABLE ONLY public.galeri ALTER COLUMN id_foto SET DEFAULT nextval('public.
 
 
 --
--- TOC entry 3258 (class 2604 OID 51398)
+-- TOC entry 3258 (class 2604 OID 18528)
 -- Name: jurnal id_jurnal; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -824,7 +824,7 @@ ALTER TABLE ONLY public.jurnal ALTER COLUMN id_jurnal SET DEFAULT nextval('publi
 
 
 --
--- TOC entry 3259 (class 2604 OID 51399)
+-- TOC entry 3259 (class 2604 OID 18529)
 -- Name: kerjasama id_kerjasama; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -832,7 +832,7 @@ ALTER TABLE ONLY public.kerjasama ALTER COLUMN id_kerjasama SET DEFAULT nextval(
 
 
 --
--- TOC entry 3260 (class 2604 OID 51400)
+-- TOC entry 3260 (class 2604 OID 18530)
 -- Name: kontak id_kontak; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -840,7 +840,7 @@ ALTER TABLE ONLY public.kontak ALTER COLUMN id_kontak SET DEFAULT nextval('publi
 
 
 --
--- TOC entry 3261 (class 2604 OID 51401)
+-- TOC entry 3261 (class 2604 OID 18531)
 -- Name: member id_member; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -848,7 +848,7 @@ ALTER TABLE ONLY public.member ALTER COLUMN id_member SET DEFAULT nextval('publi
 
 
 --
--- TOC entry 3262 (class 2604 OID 51402)
+-- TOC entry 3262 (class 2604 OID 18532)
 -- Name: pengumuman id_pengumuman; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -856,7 +856,7 @@ ALTER TABLE ONLY public.pengumuman ALTER COLUMN id_pengumuman SET DEFAULT nextva
 
 
 --
--- TOC entry 3263 (class 2604 OID 51403)
+-- TOC entry 3263 (class 2604 OID 18533)
 -- Name: publikasi id_publikasi; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -864,7 +864,7 @@ ALTER TABLE ONLY public.publikasi ALTER COLUMN id_publikasi SET DEFAULT nextval(
 
 
 --
--- TOC entry 3266 (class 2604 OID 51404)
+-- TOC entry 3266 (class 2604 OID 18534)
 -- Name: settings id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -872,7 +872,7 @@ ALTER TABLE ONLY public.settings ALTER COLUMN id SET DEFAULT nextval('public.set
 
 
 --
--- TOC entry 3268 (class 2604 OID 51405)
+-- TOC entry 3268 (class 2604 OID 18535)
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -880,7 +880,7 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 
 --
--- TOC entry 3467 (class 0 OID 51295)
+-- TOC entry 3467 (class 0 OID 18273)
 -- Dependencies: 214
 -- Data for Name: agenda; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -894,7 +894,7 @@ COPY public.agenda (id_agenda, nama_agenda, tgl_agenda, link_agenda, id_anggota)
 
 
 --
--- TOC entry 3469 (class 0 OID 51301)
+-- TOC entry 3469 (class 0 OID 18279)
 -- Dependencies: 216
 -- Data for Name: anggota; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -907,7 +907,7 @@ COPY public.anggota (id_anggota, nama_gelar, foto, jabatan, email, no_telp, bida
 
 
 --
--- TOC entry 3471 (class 0 OID 51307)
+-- TOC entry 3471 (class 0 OID 18285)
 -- Dependencies: 218
 -- Data for Name: berita; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -916,14 +916,22 @@ COPY public.berita (id_berita, judul, gambar, informasi, tanggal, author, create
 1	Workshop Dasar-Dasar ROS	gambar_workshop.jpg	Telah diselenggarakan Workshop Dasar-Dasar Robot Operating System (ROS) pada 15-16 November 2025.	2025-11-17	1	2025-12-09 07:49:26.986257	approved	approved
 2	Lab Meraih Hibah Penelitian Baru	gambar_hibah.jpg	Peneliti Lab mendapatkan hibah riset untuk 3 tahun ke depan dengan fokus IoT dan Data Science.	2025-10-25	2	2025-12-09 07:49:26.986257	approved	approved
 3	Kunjungan Industri ke PT. Robotik Jaya	gambar_kunjungan.jpg	Mahasiswa dan Anggota Lab melakukan kunjungan ke PT. Robotik Jaya untuk melihat langsung proses produksi.	2025-11-01	3	2025-12-09 07:49:26.986257	approved	approved
+4	judul	gambar_workshop.jpg	xxy	2025-11-15	1	2025-12-09 07:49:26.986257	approved	approved
+5	judul1	fier	gambar.jpg	2025-11-22	2	2025-12-09 07:49:26.986257	approved	approved
+11	tst	assets/img/berita/berita_1765285599_69381edfb0b34.png	tst	2025-11-19	1	2025-12-09 20:06:39.776715	rejected	rejected
+10	test5	assets/img/berita/berita_1765252756_69379e94a137e.png	info test5	2025-12-14	1	2025-12-09 10:59:16.699622	approved	approved
+9	et4	assets/img/berita/berita_1765244177_69377d11682dc.png	4646	2025-11-13	1	2025-12-09 08:36:17.452733	approved	approved
+13	13	assets/img/berita/berita_1765336940_6938e76c369e6.png	13	2025-12-16	1	2025-12-10 10:22:20.267678	approved	approved
+15	15	\N	15	2025-11-04	1	2025-12-10 17:46:58.683089	pending	pending
+16	test	\N	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.	2025-11-16	1	2025-12-10 17:50:14.826091	pending	pending
 18	Lorem ipsum dolor sit amet, consectetur elit, do   et . Ut ad , quis ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate	\N	2	2025-12-04	1	2025-12-10 17:52:22.778587	approved	approved
-20	TRY55	assets/img/berita/berita_1765393042_a9ea6b6622178c7e.jpeg	555	2025-05-05	2	2025-12-11 01:20:04.545333	approved	approved
-5	berita elon musk	fier	coba tes dulu ya	2025-11-03	1	2025-12-09 07:49:26.986257	approved	approved
+17	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 	\N	test	2025-11-14	1	2025-12-10 17:51:16.22263	rejected	rejected
+19	TRY55	assets/img/berita/berita_1765397977_9374b5268ad1403d.jpeg	try	2025-12-05	1	2025-12-10 20:39:48.028817	pending	pending
 \.
 
 
 --
--- TOC entry 3473 (class 0 OID 51313)
+-- TOC entry 3473 (class 0 OID 18294)
 -- Dependencies: 220
 -- Data for Name: fasilitas; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -936,7 +944,7 @@ COPY public.fasilitas (id_fasilitas, nama_fasilitas, deskripsi, foto, created_by
 
 
 --
--- TOC entry 3475 (class 0 OID 51319)
+-- TOC entry 3475 (class 0 OID 18300)
 -- Dependencies: 222
 -- Data for Name: galeri; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -946,7 +954,7 @@ COPY public.galeri (id_foto, nama_foto, deskripsi, file_foto, id_anggota, update
 
 
 --
--- TOC entry 3477 (class 0 OID 51325)
+-- TOC entry 3477 (class 0 OID 18306)
 -- Dependencies: 224
 -- Data for Name: jurnal; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -956,7 +964,7 @@ COPY public.jurnal (id_jurnal, judul, tanggal_upload, penyusun, link_jurnal) FRO
 
 
 --
--- TOC entry 3479 (class 0 OID 51331)
+-- TOC entry 3479 (class 0 OID 18312)
 -- Dependencies: 226
 -- Data for Name: kerjasama; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -966,7 +974,7 @@ COPY public.kerjasama (id_kerjasama, nama_perusahaan, proposal, contact_perusaha
 
 
 --
--- TOC entry 3481 (class 0 OID 51337)
+-- TOC entry 3481 (class 0 OID 18318)
 -- Dependencies: 228
 -- Data for Name: kontak; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -976,7 +984,7 @@ COPY public.kontak (id_kontak, nama, email, no_telp, deskripsi_tujuan, opsi_kerj
 
 
 --
--- TOC entry 3483 (class 0 OID 51343)
+-- TOC entry 3483 (class 0 OID 18324)
 -- Dependencies: 230
 -- Data for Name: member; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -989,7 +997,7 @@ COPY public.member (id_member, email, nama, foto, nim, jurusan, prodi, kelas, ta
 
 
 --
--- TOC entry 3485 (class 0 OID 51350)
+-- TOC entry 3485 (class 0 OID 18331)
 -- Dependencies: 232
 -- Data for Name: pengumuman; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1002,7 +1010,7 @@ COPY public.pengumuman (id_pengumuman, judul, informasi, id_anggota, tanggal) FR
 
 
 --
--- TOC entry 3487 (class 0 OID 51356)
+-- TOC entry 3487 (class 0 OID 18337)
 -- Dependencies: 234
 -- Data for Name: publikasi; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1015,7 +1023,7 @@ COPY public.publikasi (id_publikasi, judul, penulis, tanggal_terbit, file_publik
 
 
 --
--- TOC entry 3489 (class 0 OID 51364)
+-- TOC entry 3489 (class 0 OID 18345)
 -- Dependencies: 236
 -- Data for Name: settings; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1026,7 +1034,7 @@ COPY public.settings (id, key, value, updated_at, updated_by) FROM stdin;
 
 
 --
--- TOC entry 3491 (class 0 OID 51371)
+-- TOC entry 3491 (class 0 OID 18352)
 -- Dependencies: 238
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1156,7 +1164,7 @@ SELECT pg_catalog.setval('public.users_id_seq', 3, true);
 
 
 --
--- TOC entry 3274 (class 2606 OID 51407)
+-- TOC entry 3274 (class 2606 OID 18388)
 -- Name: agenda agenda_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1165,7 +1173,7 @@ ALTER TABLE ONLY public.agenda
 
 
 --
--- TOC entry 3276 (class 2606 OID 51409)
+-- TOC entry 3276 (class 2606 OID 18390)
 -- Name: anggota anggota_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1174,7 +1182,7 @@ ALTER TABLE ONLY public.anggota
 
 
 --
--- TOC entry 3278 (class 2606 OID 51411)
+-- TOC entry 3278 (class 2606 OID 18392)
 -- Name: berita berita_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1183,7 +1191,7 @@ ALTER TABLE ONLY public.berita
 
 
 --
--- TOC entry 3280 (class 2606 OID 51413)
+-- TOC entry 3280 (class 2606 OID 18394)
 -- Name: fasilitas fasilitas_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1192,7 +1200,7 @@ ALTER TABLE ONLY public.fasilitas
 
 
 --
--- TOC entry 3282 (class 2606 OID 51415)
+-- TOC entry 3282 (class 2606 OID 18396)
 -- Name: galeri galeri_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1201,7 +1209,7 @@ ALTER TABLE ONLY public.galeri
 
 
 --
--- TOC entry 3284 (class 2606 OID 51417)
+-- TOC entry 3284 (class 2606 OID 18398)
 -- Name: jurnal jurnal_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1210,7 +1218,7 @@ ALTER TABLE ONLY public.jurnal
 
 
 --
--- TOC entry 3286 (class 2606 OID 51419)
+-- TOC entry 3286 (class 2606 OID 18400)
 -- Name: kerjasama kerjasama_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1219,7 +1227,7 @@ ALTER TABLE ONLY public.kerjasama
 
 
 --
--- TOC entry 3288 (class 2606 OID 51421)
+-- TOC entry 3288 (class 2606 OID 18402)
 -- Name: kontak kontak_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1228,7 +1236,7 @@ ALTER TABLE ONLY public.kontak
 
 
 --
--- TOC entry 3290 (class 2606 OID 51423)
+-- TOC entry 3290 (class 2606 OID 18404)
 -- Name: member member_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1237,7 +1245,7 @@ ALTER TABLE ONLY public.member
 
 
 --
--- TOC entry 3292 (class 2606 OID 51425)
+-- TOC entry 3292 (class 2606 OID 18406)
 -- Name: member member_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1246,7 +1254,7 @@ ALTER TABLE ONLY public.member
 
 
 --
--- TOC entry 3294 (class 2606 OID 51427)
+-- TOC entry 3294 (class 2606 OID 18408)
 -- Name: pengumuman pengumuman_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1255,7 +1263,7 @@ ALTER TABLE ONLY public.pengumuman
 
 
 --
--- TOC entry 3296 (class 2606 OID 51429)
+-- TOC entry 3296 (class 2606 OID 18410)
 -- Name: publikasi publikasi_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1264,7 +1272,7 @@ ALTER TABLE ONLY public.publikasi
 
 
 --
--- TOC entry 3298 (class 2606 OID 51431)
+-- TOC entry 3298 (class 2606 OID 18412)
 -- Name: settings settings_key_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1273,7 +1281,7 @@ ALTER TABLE ONLY public.settings
 
 
 --
--- TOC entry 3300 (class 2606 OID 51433)
+-- TOC entry 3300 (class 2606 OID 18414)
 -- Name: settings settings_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1282,7 +1290,7 @@ ALTER TABLE ONLY public.settings
 
 
 --
--- TOC entry 3302 (class 2606 OID 51435)
+-- TOC entry 3302 (class 2606 OID 18416)
 -- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1291,7 +1299,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- TOC entry 3304 (class 2606 OID 51437)
+-- TOC entry 3304 (class 2606 OID 18418)
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1300,7 +1308,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- TOC entry 3306 (class 2606 OID 51439)
+-- TOC entry 3306 (class 2606 OID 18420)
 -- Name: users users_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1309,7 +1317,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- TOC entry 3308 (class 2606 OID 51440)
+-- TOC entry 3308 (class 2606 OID 18421)
 -- Name: berita berita_author_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1318,7 +1326,7 @@ ALTER TABLE ONLY public.berita
 
 
 --
--- TOC entry 3307 (class 2606 OID 51445)
+-- TOC entry 3307 (class 2606 OID 18426)
 -- Name: agenda fk_agenda_anggota; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1327,7 +1335,7 @@ ALTER TABLE ONLY public.agenda
 
 
 --
--- TOC entry 3309 (class 2606 OID 51450)
+-- TOC entry 3309 (class 2606 OID 18431)
 -- Name: berita fk_berita_author; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1336,7 +1344,7 @@ ALTER TABLE ONLY public.berita
 
 
 --
--- TOC entry 3310 (class 2606 OID 51455)
+-- TOC entry 3310 (class 2606 OID 18436)
 -- Name: fasilitas fk_fasilitas_user; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1345,7 +1353,7 @@ ALTER TABLE ONLY public.fasilitas
 
 
 --
--- TOC entry 3311 (class 2606 OID 51460)
+-- TOC entry 3311 (class 2606 OID 18441)
 -- Name: galeri fk_galeri_admin; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1354,7 +1362,7 @@ ALTER TABLE ONLY public.galeri
 
 
 --
--- TOC entry 3312 (class 2606 OID 51465)
+-- TOC entry 3312 (class 2606 OID 18446)
 -- Name: galeri fk_galeri_anggota; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1363,7 +1371,7 @@ ALTER TABLE ONLY public.galeri
 
 
 --
--- TOC entry 3313 (class 2606 OID 51470)
+-- TOC entry 3313 (class 2606 OID 18451)
 -- Name: jurnal fk_jurnal_penyusun; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1372,7 +1380,7 @@ ALTER TABLE ONLY public.jurnal
 
 
 --
--- TOC entry 3315 (class 2606 OID 51475)
+-- TOC entry 3315 (class 2606 OID 18456)
 -- Name: kerjasama fk_kerjasama_anggota; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1381,7 +1389,7 @@ ALTER TABLE ONLY public.kerjasama
 
 
 --
--- TOC entry 3316 (class 2606 OID 51480)
+-- TOC entry 3316 (class 2606 OID 18461)
 -- Name: kontak fk_kontak_anggota; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1390,7 +1398,7 @@ ALTER TABLE ONLY public.kontak
 
 
 --
--- TOC entry 3317 (class 2606 OID 51485)
+-- TOC entry 3317 (class 2606 OID 18466)
 -- Name: pengumuman fk_pengumuman_anggota; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1399,7 +1407,7 @@ ALTER TABLE ONLY public.pengumuman
 
 
 --
--- TOC entry 3318 (class 2606 OID 51490)
+-- TOC entry 3318 (class 2606 OID 18471)
 -- Name: publikasi fk_publikasi_anggota; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1408,7 +1416,7 @@ ALTER TABLE ONLY public.publikasi
 
 
 --
--- TOC entry 3319 (class 2606 OID 51495)
+-- TOC entry 3319 (class 2606 OID 18476)
 -- Name: publikasi fk_publikasi_member; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1417,7 +1425,7 @@ ALTER TABLE ONLY public.publikasi
 
 
 --
--- TOC entry 3321 (class 2606 OID 51500)
+-- TOC entry 3321 (class 2606 OID 18481)
 -- Name: settings fk_settings_user; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1426,7 +1434,7 @@ ALTER TABLE ONLY public.settings
 
 
 --
--- TOC entry 3314 (class 2606 OID 51505)
+-- TOC entry 3314 (class 2606 OID 18486)
 -- Name: jurnal jurnal_penyusun_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1435,7 +1443,7 @@ ALTER TABLE ONLY public.jurnal
 
 
 --
--- TOC entry 3320 (class 2606 OID 51510)
+-- TOC entry 3320 (class 2606 OID 18491)
 -- Name: publikasi publikasi_id_anggota_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1443,11 +1451,11 @@ ALTER TABLE ONLY public.publikasi
     ADD CONSTRAINT publikasi_id_anggota_fkey FOREIGN KEY (id_anggota) REFERENCES public.anggota(id_anggota) ON DELETE SET NULL;
 
 
--- Completed on 2025-12-11 02:03:27
+-- Completed on 2025-12-11 03:21:32
 
 --
 -- PostgreSQL database dump complete
 --
 
-\unrestrict DzvSkVzc9OBtk4dKefqr3oy07PRdOzffit9VYuKml3oHCJPGDZbrtTOeLVoyIYk
+\unrestrict nbWXK4sWeIQBrrhr7FbwGQfSjcySytNL78zXSBgpN3lXfquQ1NqWiIUWTE8NoZs
 
