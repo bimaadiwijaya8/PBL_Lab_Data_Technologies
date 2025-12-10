@@ -236,19 +236,19 @@ function displayBeritaTable(beritaList) {
     
     tableBody.innerHTML = beritaList.map(berita => `
         <tr>
-            <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm font-medium text-gray-900">${berita.judul}</div>
+            <td class="px-4 py-4">
+                <div class="text-sm font-medium text-gray-900 break-words">${berita.judul}</div>
             </td>
-            <td class="px-6 py-4 whitespace-nowrap">
+            <td class="px-4 py-4 whitespace-nowrap">
                 <div class="text-sm text-gray-500">${berita.author || 'Admin'}</div>
             </td>
-            <td class="px-6 py-4 whitespace-nowrap">
+            <td class="px-4 py-4 whitespace-nowrap">
                 <div class="text-sm text-gray-500">${formatDate(berita.tanggal || berita.created_at)}</div>
             </td>
-            <td class="px-6 py-4 whitespace-nowrap">
+            <td class="px-4 py-4 whitespace-nowrap">
                 ${getStatusBadge(berita.aksi || berita.status)}
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+            <td class="px-4 py-4 whitespace-nowrap text-sm font-medium">
                 ${getActionButtons(berita)}
             </td>
         </tr>
@@ -262,11 +262,17 @@ function getActionButtons(berita) {
             <button onclick="viewBerita(${berita.id_berita})" class="text-indigo-600 hover:text-indigo-900 mr-3" title="Lihat">
                 <i class="fas fa-eye"></i>
             </button>
+            <button onclick="editBerita(${berita.id_berita})" class="text-blue-600 hover:text-blue-900 mr-3" title="Edit">
+                <i class="fas fa-edit"></i>
+            </button>
             <button onclick="approveBerita(${berita.id_berita}, 'approved')" class="text-green-600 hover:text-green-900 mr-3" title="Setujui">
                 <i class="fas fa-check"></i>
             </button>
-            <button onclick="approveBerita(${berita.id_berita}, 'rejected')" class="text-red-600 hover:text-red-900" title="Tolak">
+            <button onclick="approveBerita(${berita.id_berita}, 'rejected')" class="text-red-600 hover:text-red-900 mr-3" title="Tolak">
                 <i class="fas fa-times"></i>
+            </button>
+            <button onclick="deleteBerita(${berita.id_berita})" class="text-red-600 hover:text-red-900" title="Hapus">
+                <i class="fas fa-trash"></i>
             </button>
         `;
     } else {
@@ -331,27 +337,7 @@ async function loadBeritaTable() {
                         </td>
                         <td class="px-6 py-4">
                             <div class="flex items-center gap-2">
-                                ${berita.status === 'pending' || berita.aksi === 'pending' ? `
-                                    <button onclick="viewBerita(${berita.id_berita})" class="text-indigo-600 hover:text-indigo-900" title="Lihat">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button onclick="approveBerita(${berita.id_berita})" class="text-green-600 hover:text-green-900" title="Setujui">
-                                        <i class="fas fa-check"></i>
-                                    </button>
-                                    <button onclick="rejectBerita(${berita.id_berita})" class="text-red-600 hover:text-red-900" title="Tolak">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                ` : `
-                                    <button onclick="viewBerita(${berita.id_berita})" class="text-indigo-600 hover:text-indigo-900" title="Lihat">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                `}
-                                <button onclick="editBerita(${berita.id_berita})" class="text-blue-600 hover:text-blue-900" title="Edit">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button onclick="deleteBerita(${berita.id_berita})" class="text-red-600 hover:text-red-900" title="Hapus">
-                                    <i class="fas fa-trash"></i>
-                                </button>
+                                ${getActionButtons(berita)}
                             </div>
                         </td>
                     </tr>
