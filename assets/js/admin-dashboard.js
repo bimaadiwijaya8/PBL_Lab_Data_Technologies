@@ -259,6 +259,9 @@ function displayBeritaTable(beritaList) {
 function getActionButtons(berita) {
     if (berita.aksi === 'pending' || berita.status === 'pending') {
         return `
+            <button onclick="viewBerita(${berita.id_berita})" class="text-indigo-600 hover:text-indigo-900 mr-3" title="Lihat">
+                <i class="fas fa-eye"></i>
+            </button>
             <button onclick="approveBerita(${berita.id_berita}, 'approved')" class="text-green-600 hover:text-green-900 mr-3" title="Setujui">
                 <i class="fas fa-check"></i>
             </button>
@@ -329,6 +332,9 @@ async function loadBeritaTable() {
                         <td class="px-6 py-4">
                             <div class="flex items-center gap-2">
                                 ${berita.status === 'pending' || berita.aksi === 'pending' ? `
+                                    <button onclick="viewBerita(${berita.id_berita})" class="text-indigo-600 hover:text-indigo-900" title="Lihat">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
                                     <button onclick="approveBerita(${berita.id_berita})" class="text-green-600 hover:text-green-900" title="Setujui">
                                         <i class="fas fa-check"></i>
                                     </button>
