@@ -102,11 +102,11 @@ function createNewsCard(item) {
   }
   
   // Gambar hanya untuk Berita
-  const imageHTML = item.type === 'Berita' && item.gambar_berita ? `
-    <div class="overflow-hidden h-56 bg-gray-200">
-      <img src="../uploads/${item.gambar_berita}" alt="${item.judul}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-    </div>
-  ` : '';
+  const imageHTML = item.type === 'Berita' && item.gambar ? `
+  <div class="overflow-hidden h-56 bg-gray-200">
+    <img src="../uploads/${item.gambar}" alt="${item.judul}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+  </div>
+` : '';
   
   div.innerHTML = `
     ${imageHTML}
