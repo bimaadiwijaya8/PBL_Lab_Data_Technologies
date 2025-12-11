@@ -23,7 +23,7 @@ class Database {
                 $port = '5432';
                 $dbname = 'pbl_db';
                 $user = 'postgres';
-                $password = '12345';
+                $password = '9023JN';
 
                 // Create DSN (Data Source Name)
                 $dsn = "pgsql:host=$host;port=$port;dbname=$dbname";

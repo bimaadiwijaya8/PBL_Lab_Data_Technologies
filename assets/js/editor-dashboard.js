@@ -24,10 +24,30 @@ function initializeEditorDashboard() {
     // Mobile menu toggle
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const sidebar = document.getElementById('sidebar');
+    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
     
-    if (mobileMenuBtn && sidebar) {
-        mobileMenuBtn.addEventListener('click', () => {
+    if (mobileMenuBtn && sidebar && mobileMenuOverlay) {
+        mobileMenuBtn.addEventListener('click', (e) => {
+            e.preventDefault();
             sidebar.classList.toggle('-translate-x-full');
+            mobileMenuOverlay.classList.toggle('hidden');
+            
+            const icon = mobileMenuBtn.querySelector('i');
+            if (sidebar.classList.contains('-translate-x-full')) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        });
+        
+        mobileMenuOverlay.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full');
+            mobileMenuOverlay.classList.add('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
         });
     }
     
@@ -91,9 +111,13 @@ function initializeEditorDashboard() {
                 breadcrumbCurrent.textContent = 'Edit Halaman';
             }
             
-            // Close mobile menu
-            if (sidebar) {
+            // Close mobile menu when clicking on a link
+            if (window.innerWidth < 1024 && sidebar && mobileMenuOverlay) {
                 sidebar.classList.add('-translate-x-full');
+                mobileMenuOverlay.classList.add('hidden');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
             }
         });
     });

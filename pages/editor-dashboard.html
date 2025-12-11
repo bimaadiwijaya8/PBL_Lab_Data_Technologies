@@ -22,7 +22,7 @@
 </head>
 <body class="bg-gray-50">
     <!-- Sidebar -->
-    <div class="fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out" id="sidebar">
+    <div class="fixed inset-y-0 left-0 z-30 w-64 bg-white shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out" id="sidebar">
         <div class="flex items-center justify-center h-20 bg-blue-600">
             <div class="flex items-center space-x-3">
                 <h1 class="text-white text-2xl font-bold">Editor Panel</h1>
@@ -91,10 +91,13 @@
 
     <!-- Mobile menu button -->
     <div class="lg:hidden fixed top-4 left-4 z-50">
-        <button id="mobile-menu-btn" class="bg-primary text-white p-2 rounded-md">
-            <i class="fas fa-bars"></i>
+        <button id="mobile-menu-btn" class="bg-primary text-white p-3 rounded-md shadow-lg hover:bg-blue-700 transition-colors duration-200">
+            <i class="fas fa-bars text-lg"></i>
         </button>
     </div>
+
+    <!-- Mobile menu overlay -->
+    <div id="mobile-menu-overlay" class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-20 hidden"></div>
 
     <!-- Main Content -->
     <div class="lg:ml-64 min-h-screen">
@@ -768,5 +771,38 @@
         });
     </script>
     <script src="../assets/js/editor-dashboard.js"></script>
+    <script>
+        // Backup mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const sidebar = document.getElementById('sidebar');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+            
+            if (mobileMenuBtn && sidebar && mobileMenuOverlay) {
+                mobileMenuBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    sidebar.classList.toggle('-translate-x-full');
+                    mobileMenuOverlay.classList.toggle('hidden');
+                    
+                    const icon = this.querySelector('i');
+                    if (sidebar.classList.contains('-translate-x-full')) {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    } else {
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-times');
+                    }
+                });
+                
+                mobileMenuOverlay.addEventListener('click', function() {
+                    sidebar.classList.add('-translate-x-full');
+                    mobileMenuOverlay.classList.add('hidden');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            }
+        });
+    </script>
 </body>
 </html>
